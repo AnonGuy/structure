@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '''
 Good practice for Django Applications suggest that secret keys should not be defined as hard-coded strings in the settings.py file.
 '''
-SECRET_KEY = os.environ.get('STRUCTURE_KEY') or base64.b64encode(SECRET_KEY.encode()).decode()
+SECRET_KEY = os.environ.get('STRUCTURE_KEY', base64.b64encode(SECRET_KEY.encode()).decode())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

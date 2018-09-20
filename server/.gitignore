@@ -1,2 +1,3 @@
-/__pycache__/*
+*/__pycache__/*
 /scraper/__pycache__/*
+structure_server/dashboard/__pycache__/*
