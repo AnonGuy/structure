@@ -90,7 +90,7 @@ DATABASES = {
 }
 
 if PASSWORD is not None:
-    DATABASES.update({'PASSWORD': PASSWORD})
+    DATABASES['default'].update({'PASSWORD': PASSWORD})
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
