@@ -77,17 +77,20 @@ WSGI_APPLICATION = 'structure_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+DB_USER = os.environ.get('DB_USER') or 'structure_admin'
+PASSWORD = os.environ.get('STRUCTURE_ADMIN_PASSWORD')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'StructureDB',
-        'USER': 'structure_admin',
-        'PASSWORD': os.environ.get('STRUCTURE_ADMIN_PASSWORD'),
-        'HOST': '',
+        'USER': DB_USER,
         'PORT': '5432'
     }
 }
 
+if PASSWORD is not None:
+    DATABASES['default'].update({'PASSWORD': PASSWORD})
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
