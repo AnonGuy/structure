@@ -8,6 +8,7 @@ install:
 before_script:
   - psql -c 'CREATE DATABASE StructureDB;' -U postgres
   - bash -c "psql -c \"CREATE USER structure_admin WITH PASSWORD '${STRUCTURE_ADMIN_PASSWORD}';\" -U postgres"
+  - psql -c 'GRANT ALL ON DATABASE StructureDB TO structure_admin' -U postgres
   - python structure_server/manage.py migrate
 script:
   - flake8 structure_server
