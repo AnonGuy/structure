@@ -1,9 +1,12 @@
 language: python
 python:
   - "3.6"
+services:
+  - postgresql
 install:
   - pip install -r requirements.txt
 before_script:
+  - psql -c 'create database StructureDB;' -U postgres
   - python structure_server/manage.py migrate
 script:
   - flake8 structure_server
