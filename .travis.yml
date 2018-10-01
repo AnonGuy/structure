@@ -6,8 +6,8 @@ services:
 install:
   - pip install -r requirements.txt
 before_script:
-  - psql -c 'CREATE DATABASE StructureDB;' -U postgres
   - bash -c "psql -c \"CREATE USER structure_admin WITH PASSWORD '${STRUCTURE_ADMIN_PASSWORD}';\" -U postgres"
+  - bash -c "PGPASSWORD=${STRUCTURE_ADMIN_PASSWORD} psql -c 'CREATE DATABASE StructureDB;' -U structure_admin"
   - psql -c 'GRANT ALL ON DATABASE StructureDB TO structure_admin' -U postgres
   - python structure_server/manage.py migrate
 script:
