@@ -12,8 +12,7 @@ before_script:
   - bash -c "PGPASSWORD=${STRUCTURE_ADMIN_PASSWORD} psql -c 'CREATE DATABASE StructureDB;' -U structure_admin"
   - psql -c 'GRANT ALL ON DATABASE StructureDB TO structure_admin' -U postgres
 script:
+  - flake8 structure_server
   - python structure_server/manage.py makemigrations
   - python structure_server/manage.py migrate
   - python structure_server/manage.py test dashboard
-script:
-  - flake8 structure_server
