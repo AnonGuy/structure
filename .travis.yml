@@ -1,18 +1,7 @@
 language: python
 python:
   - "3.6"
-services:
-  - postgresql
 install:
   - pip install -r requirements.txt
-before_script:
-  - bash -c "psql -c \"CREATE USER structure_admin WITH PASSWORD '${STRUCTURE_ADMIN_PASSWORD}';\" -U postgres"
-  - psql -c 'ALTER USER structure_admin CREATEDB;' -U postgres
-  - createdb structure_admin
-  - bash -c "PGPASSWORD=${STRUCTURE_ADMIN_PASSWORD} psql -c 'CREATE DATABASE StructureDB;' -U structure_admin"
-  - psql -c 'GRANT ALL ON DATABASE StructureDB TO structure_admin' -U postgres
 script:
   - flake8 structure_server
-  - python structure_server/manage.py makemigrations
-  - python structure_server/manage.py migrate
-  - python structure_server/manage.py test dashboard
