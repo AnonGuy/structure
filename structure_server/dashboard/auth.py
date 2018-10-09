@@ -1,7 +1,8 @@
 """
 My own implementation of the Authentication backend.
-Since my passwords need to be recoverable, this authentication system tries to decrypt the password
-based on a padded 128-Bit AES key, which is derived from the requester's public IP Address.
+Since my passwords need to be recoverable, this authentication system tries to
+decrypt the password based on a padded 128-Bit AES key, which is derived from
+the requester's public IP Address.
 """
 
 from django.contrib.auth.backends import ModelBackend
