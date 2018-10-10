@@ -53,7 +53,16 @@ There are several ways that computational methods can be applied to this project
 | Procedural | My application stack will be comprised of several Python modules, each separated into classes, methods and functions. I will be able to remove modules, test modules and edit modules in a way that does not affect any irrelevant components of the application. |
 | Concurrent | The web application must be able to handle multiple HTTP requests simultaneously. I will be applying concurrent thinking to plan and design the processing and response for each request. |
 
+### Research
+
+I found a service that is a similar solution to my own, **showmyhomework.co.uk**, by Satchel:
+
+#### Show my Homework
+
+
+
 # Design
 
 ### Decomposing the Problem
+
 
