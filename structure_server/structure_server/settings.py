@@ -36,7 +36,8 @@ SECRET_KEY = os.environ.get(
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'structure-server.herokuapp.com'
+    'structure-server.herokuapp.com',
+    '127.0.0.1'
 ]
 
 
