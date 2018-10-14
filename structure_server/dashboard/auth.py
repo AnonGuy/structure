@@ -7,6 +7,7 @@ the requester's public IP Address.
 
 from django.contrib.auth.backends import ModelBackend
 
+from dashboard.models import User
 from structure_server.dashboard.scraper import valid_user
 
 
@@ -15,3 +16,9 @@ class AuthBackend(ModelBackend):
         if username is None or password is None:
             return False
         return valid_user(username, password)
+
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None

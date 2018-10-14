@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import base64
 import os
 
+import dj_database_url
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -32,7 +35,10 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'structure-server.herokuapp.com',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -46,6 +52,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "dashboard",
 ]
+
+AUTHENTICATION_BACKENDS = [
+    "dashboard.auth.AuthBackend"
+]
+
+AUTH_USER_MODEL = "dashboard.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -93,6 +105,11 @@ DATABASES = {
     }
 }
 
+if os.environ.get('DATABASE_URL') is not None:
+    DATABASES["default"] = dj_database_url.config(
+        conn_max_age=600, ssl_require=True
+    )
+
 if PASSWORD is not None:
     DATABASES["default"].update({"PASSWORD": PASSWORD})
 
@@ -125,9 +142,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "dashboard.User"
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -146,4 +160,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = '/static/'
