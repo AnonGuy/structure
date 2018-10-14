@@ -5,9 +5,10 @@ decrypt the password based on a padded 128-Bit AES key, which is derived from
 the requester's public IP Address.
 """
 
+from dashboard.models import User
+
 from django.contrib.auth.backends import ModelBackend
 
-from dashboard.models import User
 from structure_server.dashboard.scraper import valid_user
 
 
