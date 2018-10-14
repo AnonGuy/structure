@@ -53,6 +53,12 @@ INSTALLED_APPS = [
     "dashboard",
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "dashboard.auth.AuthBackend"
+]
+
+AUTH_USER_MODEL = "dashboard.User"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -135,9 +141,6 @@ AUTH_PASSWORD_VALIDATORS = [
         )
     },
 ]
-
-AUTH_USER_MODEL = "dashboard.User"
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
