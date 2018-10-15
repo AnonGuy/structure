@@ -72,6 +72,6 @@ Show My Homework is a service designed for schools, that aims to unify student t
 
 ![image](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDecomposition.png?raw=true)
 
-### Database Design
-
-![image](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureERD.png?raw=true)
+| Database Relationships | Data Flow Diagram |
+|:----------------------:|:-----------------:|
+|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDataFlow.png?raw=true)
