@@ -23,7 +23,7 @@ features, in one easy to use web application.
 
 My application will solve this problem, by **integrating revision session management**, **homework
 reminders** and **performance analysis** in one simple dashboard. Students will be able to access this
-dashboard via a **Django web application**, and possibly a **React Native mobile application**.
+dashboard via a **Django web application**, and possibly a **Flutter mobile application**.
 
 In order to solve this problem with the suggested solution, I will need to learn the following:
 * Usage of the Django web framework
@@ -59,7 +59,7 @@ I found a service that is a similar solution to my own, **showmyhomework.co.uk**
 
 #### Show my Homework
 
-Show My Homework is a service designed for schools, that aims to unify student timetables, homework tasks and
+Show My Homework is a service designed for schools, that aims to unify student timetables, homework tasks and revision session management.
 
 |    Online Dashboard      |    Mobile Application    |
 |:------------------------:|:------------------------:|
@@ -73,11 +73,17 @@ Show My Homework is a service designed for schools, that aims to unify student t
 ![image](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDecomposition.png?raw=true)
 Using procedural thinking, I have broken down my solution into five main problems: 
 * **Web Scraper**
+   * The Web Scraper will be the system that communicates with MyLoreto. It will utilize the `requests` library to
+   authenticate a MyLoreto session, and scrape the relevant HTML elements such as timetabled lessons, markbook grades
+   and attendance data.
 * **Django Webserver**
+   * 
 * **Object-relational Mapper**
+   *
 * **Web Dashboard**
+   *
 * **Mobile Application.**
-
+   *
 
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
