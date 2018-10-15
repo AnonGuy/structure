@@ -74,4 +74,4 @@ Show My Homework is a service designed for schools, that aims to unify student t
 
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
-|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDataFlow.png?raw=true)
+|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDataFlow.png?raw=true) Users communicate with the system via the Mobile Client and online Dashboard.|
