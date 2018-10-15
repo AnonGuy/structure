@@ -71,6 +71,13 @@ Show My Homework is a service designed for schools, that aims to unify student t
 ### Decomposing the Problem
 
 ![image](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDecomposition.png?raw=true)
+Using procedural thinking, I have broken down my solution into five main problems: 
+* **Web Scraper**
+* **Django Webserver**
+* **Object-relational Mapper**
+* **Web Dashboard**
+* **Mobile Application.**
+
 
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
