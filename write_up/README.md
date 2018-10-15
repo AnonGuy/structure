@@ -59,9 +59,11 @@ I found a service that is a similar solution to my own, **showmyhomework.co.uk**
 
 #### Show my Homework
 
-![image](https://satchel-sw-prod.imgix.net/images/products/timetables/timetables_@2x.png)
-![image](https://satchel-sw-prod.imgix.net/images/products/timetables/mobile_timetables_@2x.png)
+Show My Homework is a service designed for schools, that aims to unify student timetables, homework tasks and
 
+Online Dashboard           |  Mobile Application
+:-------------------------:|:-------------------------:
+![](https://satchel-sw-prod.imgix.net/images/products/timetables/timetables_@2x.png)  |  ![](https://satchel-sw-prod.imgix.net/images/products/timetables/mobile_timetables_@2x.png)
 
 # Design
 
