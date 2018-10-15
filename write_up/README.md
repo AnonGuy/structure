@@ -65,4 +65,8 @@ I found a service that is a similar solution to my own, **showmyhomework.co.uk**
 
 ### Decomposing the Problem
 
+![image](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDecomposition.png?raw=true)
 
+### Database Design
+
+![image](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureERD.png?raw=true)
