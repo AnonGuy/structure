@@ -77,13 +77,13 @@ Using procedural thinking, I have broken down my solution into five main problem
    authenticate a MyLoreto session, and scrape the relevant HTML elements such as timetabled lessons, markbook grades
    and attendance data.
 * **Django Webserver**
-   * 
+   * ​
 * **Object-relational Mapper**
-   *
+   * ​
 * **Web Dashboard**
-   *
+   * ​
 * **Mobile Application.**
-   *
+   * ​
 
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
