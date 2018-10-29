@@ -1,13 +1,19 @@
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
+from .models import User
+from .scraper import valid_user
+
+
+current_session: dict = {}
+
 
 class HomePageView(TemplateView):
     """HomePage view: default view of the landing page."""
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return render(request, "dashboard.html", context=None)
+        if current_session.get('authenticated'):
+            return render(request, "dashboard.html", context=current_session)
         else:
             return redirect("/sign-in")
 
@@ -19,6 +25,14 @@ class SignInView(TemplateView):
         return render(request, "sign-in.html", context=None)
 
     def post(self, request):
-        print(request.POST.get("username"))
-        print(request.POST.get("password"))
+        username, password = (
+            request.POST.get('username'), request.POST.get('password')
+        )
+        user = User(username=username, password=password)
+        if valid_user(user):
+            current_session['user'] = user
+            current_session['authenticated'] = True
+            redirect('/')
+        else:
+            current_session['authenticated'] = False
         return render(request, "sign-in.html", context=None)

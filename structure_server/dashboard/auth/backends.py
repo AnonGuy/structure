@@ -13,12 +13,17 @@ from structure_server.dashboard.scraper import valid_user
 
 
 class AuthBackend(ModelBackend):
+    """Custom Authentication Backend that validates College credentials."""
+
     def authenticate(self, request, username=None, password=None, **kwargs):
+        """Validate the given credentials."""
         if username is None or password is None:
             return False
-        return valid_user(username, password)
+        else:
+            return valid_user(username, password)
 
     def get_user(self, user_id):
+        """Get a specified User from the given ID."""
         try:
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
