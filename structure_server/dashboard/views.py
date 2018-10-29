@@ -1,19 +1,20 @@
+"""Dashboard view objects."""
+
+from django.core import serializers
+
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
-from .models import User
 from .scraper import valid_user
-
-
-current_session: dict = {}
+from .models import User, Student
 
 
 class HomePageView(TemplateView):
     """HomePage view: default view of the landing page."""
 
     def get(self, request, *args, **kwargs):
-        if current_session.get('authenticated'):
-            return render(request, "dashboard.html", context=current_session)
+        if request.session.get('authenticated'):
+            return render(request, "dashboard.html", context=request.session)
         else:
             return redirect("/sign-in")
 
@@ -28,11 +29,22 @@ class SignInView(TemplateView):
         username, password = (
             request.POST.get('username'), request.POST.get('password')
         )
-        user = User(username=username, password=password)
+        user = User(
+            username=username, password=password
+        )
         if valid_user(user):
-            current_session['user'] = user
-            current_session['authenticated'] = True
+            print('User validated!')
+            existing_user = User.objects.get(username=user.username)
+            if existing_user:
+                user = existing_user
+            else:
+                user.save()
+            user = serializers.serialize('json', [user])
+            request.session['user'] = user
+            request.session['authenticated'] = True
             redirect('/')
         else:
-            current_session['authenticated'] = False
+            print('Incorrect credentials.')
+            request.session['authenticated'] = False
+
         return render(request, "sign-in.html", context=None)
