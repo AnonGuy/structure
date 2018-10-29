@@ -18,6 +18,7 @@ dj-database-url = "*"
 "flake8-string-format" = "==0.2.3"
 safety = "==1.8.4"
 dodgy = "==0.1.9"
+ipython = "*"
 
 [requires]
 python_version = "3.6"

@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    "dashboard.auth.AuthBackend"
+    "dashboard.auth.backends.AuthBackend"
 ]
 
 AUTH_USER_MODEL = "dashboard.User"
