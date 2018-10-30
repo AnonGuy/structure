@@ -34,7 +34,7 @@ class SignInView(TemplateView):
         )
         if valid_user(user):
             print('User validated!')
-            existing_user = User.objects.get(username=user.username)
+            existing_user = User.objects.filter(username=user.username).first()
             if existing_user:
                 user = existing_user
             else:
