@@ -1,10 +1,13 @@
 """Define various webscraping methods."""
 
-import requests
+import re
+from datetime import datetime, timedelta
 from threading import Thread
+from typing import Optional
 
-from .models import User, Student
+import requests
 
+from .models import Student, User
 
 endpoint = "https://my.loreto.ac.uk/"
 
@@ -12,11 +15,64 @@ endpoint = "https://my.loreto.ac.uk/"
 class LandingPageParser:
     """Class for parsing the Loreto landing page."""
 
-    def __init__(self, user: User):
-        response = requests.get(endpoint, auth=(user.username, user.password))
-        self.page: str = response.content.decode()
+    def _set_regex_group(self, page: bytes, name: str, pattern: bytes):
+        """Set the Student data to the first group of the given match."""
+        match = re.search(pattern, page)
+        if match is not None:
+            self.student.__setattr__(name, match.group(1).decode())
 
-    # TODO: Implement Threaded asset retrieval.
+    def _get_timetable(self):
+        """Get the first day of the week, and post to the endpoint."""
+        now = datetime.now()
+        start = now - timedelta(days=now.weekday())
+        start = start.strftime('%Y-%m-%d')
+        response: bytes = requests.get(
+            f'{endpoint}attendance/timetable/studentWeek',
+            params={'week': start, 'student_user_id': self.user_id},
+            auth=(self.user.username, self.user.password)
+        ).content
+        return response
+
+    def __init__(self, user: User, path: Optional[str] = None):
+        if path is None:
+            self.page = requests.get(
+                endpoint, auth=(user.username, user.password)
+            ).content
+        else:
+            self.page = open(path, 'rb').read()
+        self.user = user
+        self.threads: set = set()
+        self.student: Student = Student()
+        user_id = re.search(
+            br'UserId = "(\d+)"', self.page
+        )
+        if user_id is not None:
+            self.user_id: int = int(user_id.group(1))
+        self.patterns = {
+            'name': b'fullName: "([A-Za-z ]+)"',
+            'username': b'username: "([A-Za-z0-9]+)"',
+            'avatar': b'base64,(.*?)">',
+            'reference_number': b'Reference: </dt>\s+<dd>([A-Z0-9]+)',
+            'tutor': b'Tutor: </dt> <dd> (.*?) </dd>'
+        }
+        for key, pattern in self.patterns.items():
+            self.threads.add(
+                Thread(
+                    target=self._set_regex_group,
+                    args=(self.page, key, pattern)
+                )
+            )
+
+    def parse(self) -> Student:
+        """Parse the webpage content and return the resulting Student."""
+        for thread in self.threads:
+            thread.start()
+        for thread in self.threads:
+            thread.join()
+        self.student.email = '{0}@student.loreto.ac.uk'.format(
+            self.student.username
+        )
+        return self.student
 
 
 def valid_user(user: User) -> bool:
@@ -29,5 +85,7 @@ def valid_user(user: User) -> bool:
 
 def create_student(user: User) -> Student:
     """Take a User object and intialize a Student object."""
-    pass
-
+    parser = LandingPageParser(user)
+    student = parser.parse()
+    print('Created student:', repr(student.name))
+    return student

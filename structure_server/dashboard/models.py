@@ -56,7 +56,6 @@ class User(PermissionsMixin, models.Model):
     is_authenticated = True
 
     user_id = models.AutoField(primary_key=True)
-    student_id = models.OneToOneField(Student, on_delete=models.CASCADE)
     username = models.CharField(max_length=8, unique=True)
     password = models.CharField(max_length=20)
 

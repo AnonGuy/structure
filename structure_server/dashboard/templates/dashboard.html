@@ -18,8 +18,13 @@
 
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="dashboard.html#">Structure Dashboard</a>
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="dashboard.html#">
+        Structure Dashboard
+      </a>
+      <input
+        class="form-control form-control-dark w-100"
+        type="text" placeholder="Search" aria-label="Search"
+      >
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="dashboard.html#">Sign out</a>
@@ -31,6 +36,7 @@
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
+            <img id="student-avatar" src="data: image/jpeg;base64,{{ student.avatar }}">
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link active" href="dashboard.html#">
@@ -64,7 +70,7 @@
               </li>
             </ul>
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 text-muted">
               <span>Saved reports</span>
               <a class="d-flex align-items-center text-muted" href="dashboard.html#">
                 <span data-feather="plus-circle"></span>
@@ -79,13 +85,13 @@
                 </a>
               </li>
               -->
-            </ul>
+             </ul>
           </div>
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+            <h1 class="h2">{{ student.name }}</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Save</button>
@@ -235,8 +241,14 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../static/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.jQuery || document.write('<script src="../static/js/vendor/jquery-slim.min.js"><\/script>')
+    </script>
     <script src="../static/js/vendor/popper.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
 
