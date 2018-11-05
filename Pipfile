@@ -7,6 +7,7 @@ name = "pypi"
 django = "==2.1.2"
 "psycopg2-binary" = "*"
 dj-database-url = "*"
+requests = "*"
 
 [dev-packages]
 "flake8" = "==3.5.0"
