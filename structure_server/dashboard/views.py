@@ -9,7 +9,7 @@ from .scraper import LandingPageParser, valid_user
 
 
 class HomePageView(TemplateView):
-    """HomePage view: default view of the landing page."""
+    """HomePageView: default view of the landing page."""
 
     def get(self, request, *args, **kwargs):
         if request.session.get('authenticated'):
@@ -59,3 +59,14 @@ class SignInView(TemplateView):
             request.session['authenticated'] = False
 
         return render(request, "sign-in.html", context=None)
+
+
+class SignOutView(TemplateView):
+    """SignOutView: view for the sign out page."""
+
+    def get(self, request, *args, **kwargs):
+        if request.session.get('authenticated'):
+            request.session['authenticated'] = False
+            return redirect('/sign-in')
+        else:
+            return redirect("/sign-in")
