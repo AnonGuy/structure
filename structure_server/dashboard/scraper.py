@@ -21,6 +21,10 @@ class LandingPageParser:
         if match is not None:
             self.student.__setattr__(name, match.group(1).decode())
 
+    def _get_short_timetable(self):
+        """Get the timetable for the current day."""
+        pass
+
     def _get_timetable(self):
         """Get the first day of the week, and post to the endpoint."""
         now = datetime.now()
