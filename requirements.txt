@@ -38,7 +38,7 @@ Pygments==2.2.0
 pyparsing==2.3.0
 pytz==2018.7
 PyYAML==3.13
-requests==2.20.0
+requests==2.20.1
 safety==1.8.4
 six==1.11.0
 smmap2==2.0.5
