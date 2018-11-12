@@ -27,7 +27,8 @@ class LandingPageParser:
         pattern = re.compile(
             b'Entry ".*?>(?P<time>[0-9 -:]+)'
             b'.*?(?P<room>[()A-Z0-9]+)'
-            b'.*?(?P<teacher>[A-Za-z -]+) '
+            b'.*?(?P<teacher>[A-Za-z -]+) ',
+            re.DOTALL
         )
         for time, room, teacher in pattern.findall(self.page):
             timetable.append(
