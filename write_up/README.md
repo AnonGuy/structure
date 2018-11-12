@@ -102,7 +102,15 @@ I started by generating the boilerplate Django project with the following comman
 ```bash
 $ django-admin startproject structure_server
 ```
-
-
+This created the following directory structure:
+```
+structure_server/
+    manage.py
+    structure_server/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+```
 
 
