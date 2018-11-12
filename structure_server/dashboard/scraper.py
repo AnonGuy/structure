@@ -31,6 +31,7 @@ class LandingPageParser:
             re.DOTALL
         )
         for time, room, teacher in pattern.findall(self.page):
+            room = room.strip(b'()')
             subject, teacher = teacher.split(b' - ')
             timetable.append(
                 {
