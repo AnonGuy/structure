@@ -25,7 +25,7 @@ class LandingPageParser:
         """Get the timetable for the current day."""
         timetable = []
         pattern = re.compile(
-            b'Entry .*?>(?P<time>[0-9 -:]+)'
+            b'TimetableEntry .*?>(?P<time>[0-9 -:]+)'
             b'.*?(?P<room>[()A-Z0-9]+)'
             b'.*?(?P<teacher>[()A-Za-z0-9 -]+) ',
             re.DOTALL
