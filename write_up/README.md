@@ -88,3 +88,9 @@ Using procedural thinking, I have broken down my solution into five main problem
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
 |![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDataFlow.png?raw=true) Users communicate with the system via the Mobile Client and online Dashboard.|
+
+### Version 1
+
+
+
+
