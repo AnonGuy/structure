@@ -122,9 +122,9 @@
               {% for lesson in student.short_timetable %}
               <tr>
                 <th scope="row">{{ lesson.time }}</th>
-                <td>{{ lesson.room }}</td>
+                <td>{{ lesson.subject }}</td>
                 <td>{{ lesson.teacher }}</td>
-                <td>@mdo</td>
+                <td>{{ lesson.room }}</td>
               </tr>
               {% endfor %}
             </tbody>
