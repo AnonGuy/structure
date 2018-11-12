@@ -31,10 +31,12 @@ class LandingPageParser:
             re.DOTALL
         )
         for time, room, teacher in pattern.findall(self.page):
+            subject, teacher = teacher.split(b' - ')
             timetable.append(
                 {
                     'time': time.decode(),
                     'room': room.decode(),
+                    'subject': subject.decode(),
                     'teacher': teacher.decode()
                 }
             )
