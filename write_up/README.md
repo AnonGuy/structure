@@ -96,6 +96,12 @@ Using procedural thinking, I have broken down my solution into five main problem
 * Are there any features you want to see from a system like this?
 * Are there any features you want removed?
 
+# Version 1
+
+I started by generating the boilerplate Django project with the following command:
+```bash
+$ django-admin startproject structure_server
+```
 
 
 
