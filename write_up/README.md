@@ -112,5 +112,26 @@ structure_server/
         urls.py
         wsgi.py
 ```
-
-
+In order to comply with separation of concerns, I decided to implement my student dashboard as a separate module in the project, named `dashboard`. To do this, I used the following command:
+```
+$ python manage.py startapp dashboard
+```
+This resulted in the following directory structure:
+```
+structure_server/
+    manage.py
+    structure_server/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+    dashboard/
+        __init__.py
+        admin.py
+        apps.py
+        migrations/
+            __init__.py
+        models.py
+        tests.py
+        views.py
+```
