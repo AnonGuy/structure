@@ -89,7 +89,12 @@ Using procedural thinking, I have broken down my solution into five main problem
 |:----------------------:|:-----------------:|
 |![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDataFlow.png?raw=true) Users communicate with the system via the Mobile Client and online Dashboard.|
 
-### Version 1
+### Questions to ask
+
+* Have you ever used a homework management system before?
+* If so, what are your favourite features of this system?
+* Are there any features you want to see from a system like this?
+* Are there any features you want removed?
 
 
 
