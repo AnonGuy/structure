@@ -31,7 +31,7 @@ class LandingPageParser:
         )
         for time, room, teacher in pattern.findall(self.page):
             timetable.append(
-                {'time': time, 'room': room, 'teacher': teacher}
+                {'time': time.decode(), 'room': room.decode(), 'teacher': teacher.decode()}
             )
         self.student.short_timetable = timetable
 
