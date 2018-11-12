@@ -23,7 +23,17 @@ class LandingPageParser:
 
     def _get_short_timetable(self):
         """Get the timetable for the current day."""
-        pass
+        timetable = []
+        pattern = re.compile(
+            b'".*?>(?P<time>[0-9 -:]+)'
+            b'.*?(?P<room>[()A-Z0-9]+)'
+            b'.*?(?P<teacher>[A-Za-z -]+) '
+        )
+        for time, room, teacher in pattern.findall(self.page):
+            timetable.append(
+                {'time': time, 'room': room, 'teacher': teacher}
+            )
+        self.student.short_timetable = timetable
 
     def _get_timetable(self):
         """Get the first day of the week, and post to the endpoint."""
@@ -52,14 +62,15 @@ class LandingPageParser:
         )
         if user_id is not None:
             self.user_id: int = int(user_id.group(1))
-        self.patterns = {
+        patterns = {
             'name': b'fullName: "([A-Za-z ]+)"',
             'username': b'username: "([A-Za-z0-9]+)"',
             'avatar': b'base64,(.*?)">',
             'reference_number': b'Reference: </dt>\s+<dd>([A-Z0-9]+)',
             'tutor': b'Tutor: </dt> <dd> (.*?) </dd>'
         }
-        for key, pattern in self.patterns.items():
+        self.threads.add(Thread(target=self._get_short_timetable))
+        for key, pattern in patterns.items():
             self.threads.add(
                 Thread(
                     target=self._set_regex_group,
