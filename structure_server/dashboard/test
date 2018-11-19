@@ -1,0 +1,255 @@
+   <div class="well"><h3>Monday</h3><ul class="timetable-entry-list"><li class="timetable-entry-line">
+        <strong>09:00 - 10:15:</strong> Physics in B330 with  I Udall         </li>
+<li class="timetable-entry-line">
+        <strong>10:30 - 11:40:</strong> Physics in B330 with  I Udall         </li>
+<li class="timetable-entry-line">
+        <strong>11:40 - 12:35:</strong> Lunch          </li>
+<li class="timetable-entry-line">
+        <strong>12:35 - 13:30:</strong> Tutorial (A 1-18) in B317 with  K Strickleton         </li>
+<li class="timetable-entry-line">
+        <strong>13:30 - 14:40:</strong> Computing in E421 with  J Mohammed         </li>
+<li class="timetable-entry-line">
+        <strong>14:50 - 16:00:</strong> Computing in E421 with  J Mohammed         </li>
+</ul></div><div class="well"><h3>Tuesday</h3><ul class="timetable-entry-list"><li class="timetable-entry-line">
+        <strong>11:45 - 12:00:</strong> Meeting Time          </li>
+<li class="timetable-entry-line">
+        <strong>12:00 - 13:05:</strong> Physics in B328 with  I Udall         </li>
+<li class="timetable-entry-line">
+        <strong>13:05 - 13:50:</strong> Lunch          </li>
+</ul></div><div class="well"><h3>Wednesday</h3><ul class="timetable-entry-list"><li class="timetable-entry-line">
+        <strong>11:45 - 12:00:</strong> Meeting Time          </li>
+<li class="timetable-entry-line">
+        <strong>12:00 - 13:05:</strong> Computing in E421 with  J Mohammed         </li>
+<li class="timetable-entry-line">
+        <strong>13:05 - 13:50:</strong> Lunch          </li>
+<li class="timetable-entry-line">
+        <strong>13:50 - 14:50:</strong> Maths in J111 with  D Overland         </li>
+<li class="timetable-entry-line">
+        <strong>15:00 - 16:00:</strong> Maths in J111 with  D Overland         </li>
+</ul></div><div class="well"><h3>Thursday</h3><ul class="timetable-entry-list"><li class="timetable-entry-line">
+        <strong>11:45 - 12:00:</strong> Tutorial (A 1-18) in B317 with  K Strickleton         </li>
+<li class="timetable-entry-line">
+        <strong>12:00 - 13:00:</strong> Physics in B325 with  I Udall         </li>
+<li class="timetable-entry-line">
+        <strong>13:00 - 13:50:</strong> Lunch          </li>
+<li class="timetable-entry-line">
+          <strong>15:00 - 16:00:</strong> RE in B125 with  R Ripley         </li>
+  </ul></div><div class="well"><h3>Friday</h3><ul class="timetable-entry-list"><li class="timetable-entry-line">
+          <strong>09:00 - 10:15:</strong> Maths in J111 with  D Overland         </li>
+  <li class="timetable-entry-line">
+          <strong>10:30 - 11:45:</strong> Maths in J111 with  D Overland         </li>
+  <li class="timetable-entry-line">
+          <strong>11:45 - 12:00:</strong> Meeting Time          </li>
+  <li class="timetable-entry-line">
+          <strong>12:00 - 13:05:</strong> Computing in E421 with  J Mohammed         </li>
+  <li class="timetable-entry-line">
+          <strong>13:05 - 13:50:</strong> Lunch          </li>
+  </ul></div></div>
+  <div class="hidden-xs hidden-sm">
+      <table class="table table-striped table-bordered" id="timetable-display"><tbody><tr><th>Monday</th>
+<td id="timetable-cell-m1" style="height: 100%" colspan="1" data-period-code="M1">
+        <div class="periodTimes">09:00 - 10:15</div>
+    <div class="periodClassCode">Physics</div>
+    <div class="pull-left periodClassStaff"> I Udall </div>
+    <div class="periodClassRoom pull-right">B330</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Physics (PHA2-C1-18)"></div>    </td>
+<td id="timetable-cell-m2" style="height: 100%" colspan="1" data-period-code="M2">
+        <div class="periodTimes">10:30 - 11:40</div>
+    <div class="periodClassCode">Physics</div>
+    <div class="pull-left periodClassStaff"> I Udall </div>
+    <div class="periodClassRoom pull-right">B330</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Physics (PHA2-C1-18)"></div>    </td>
+<td id="timetable-cell-mtpa" style="height: 100%" colspan="3" data-period-code="MTPA">
+        <div class="periodTimes">11:40 - 12:35</div>
+    <div class="periodClassCode">Lunch</div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-mtpb" style="height: 100%" colspan="3" data-period-code="MTPB">
+        <div class="periodTimes">12:35 - 13:30</div>
+    <div class="periodClassCode">Tutorial (A 1-18)</div>
+    <div class="pull-left periodClassStaff"> K Strickleton </div>
+    <div class="periodClassRoom pull-right">B317</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="Tutorial (A 1-18)"></div>    </td>
+<td id="timetable-cell-m4" style="height: 100%" colspan="1" data-period-code="M4">
+        <div class="periodTimes">13:30 - 14:40</div>
+    <div class="periodClassCode">Computing</div>
+    <div class="pull-left periodClassStaff"> J Mohammed </div>
+    <div class="periodClassRoom pull-right">E421</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Computing (CGA2-F1-18)"></div>    </td>
+<td id="timetable-cell-m5" style="height: 100%" colspan="1" data-period-code="M5">
+        <div class="periodTimes">14:50 - 16:00</div>
+    <div class="periodClassCode">Computing</div>
+    <div class="pull-left periodClassStaff"> J Mohammed </div>
+    <div class="periodClassRoom pull-right">E421</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Computing (CGA2-F1-18)"></div>    </td></tr><tr><th>Tuesday</th>
+<td id="timetable-cell-t1" style="height: 100%" colspan="1" data-period-code="T1">
+        <div class="periodTimes">09:00 - 10:15</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-t2" style="height: 100%" colspan="1" data-period-code="T2">
+        <div class="periodTimes">10:30 - 11:45</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-tm" style="height: 100%" colspan="2" data-period-code="TM">
+        <div class="periodTimes">11:45 - 12:00</div>
+    <div class="periodClassCode">Meeting Time</divthth>>>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-t3" style="height: 100%" colspan="2" data-period-code="T3">
+        <div class="periodTimes">12:00 - 13:05</div>
+    <div class="periodClassCode">Physics</div>
+    <div class="pull-left periodClassStaff"> I Udall </div>
+    <div class="periodClassRoom pull-right">B328</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Physics (PHA2-C1-18)"></div>    </td>
+<td id="timetable-cell-tl" style="height: 100%" colspan="2" data-period-code="TL">
+        <div class="periodTimes">13:05 - 13:50</div>
+    <div class="periodClassCode">Lunch</div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-t4" style="height: 100%" colspan="1" data-period-code="T4">
+        <div class="periodTimes">13:50 - 14:50</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-t5" style="height: 100%" colspan="1" data-period-code="T5">
+        <div class="periodTimes">15:00 - 16:00</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td></tr><tr><th>Wednesday</th>
+<td id="timetable-cell-w1" style="height: 100%" colspan="1" data-period-code="W1">
+        <div class="periodTimes">09:00 - 10:15</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-w2" style="height: 100%" colspan="1" data-period-code="W2">
+        <div class="periodTimes">10:30 - 11:45</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-wt" style="height: 100%" colspan="2" data-period-code="WT">
+        <div class="periodTimes">11:45 - 12:00</div>
+    <div class="periodClassCode">Meeting Time</div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-w3" style="height: 100%" colspan="2" data-period-code="W3">
+        <div class="periodTimes">12:00 - 13:05</div>
+    <div class="periodClassCode">Computing</div>
+    <div class="pull-left periodClassStaff"> J Mohammed </div>
+    <div class="periodClassRoom pull-right">E421</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Computing (CGA2-F1-18)"></div>    </td>
+<td id="timetable-cell-wl" style="height: 100%" colspan="2" data-period-code="WL">
+        <div class="periodTimes">13:05 - 13:50</div>
+    <div class="periodClassCode">Lunch</div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-w4" style="height: 100%" colspan="1" data-period-code="W4">
+        <div class="periodTimes">13:50 - 14:50</div>
+    <div class="periodClassCode">Maths</div>
+    <div class="pull-left periodClassStaff"> D Overland </div>
+    <div class="periodClassRoom pull-right">J111</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Mathematics  (MAA2-E2-18)"></div>    </td>
+<td id="timetable-cell-w5" style="height: 100%" colspan="1" data-period-code="W5">
+        <div class="periodTimes">15:00 - 16:00</div>
+    <div class="periodClassCode">Maths</div>
+    <div class="pull-left periodClassStaff"> D Overland </div>
+    <div class="periodClassRoom pull-right">J111</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Mathematics  (MAA2-E2-18)"></div>    </td></tr><tr><th>Thursday</th>
+<td id="timetable-cell-h1" style="height: 100%" colspan="1" data-period-code="H1">
+        <div class="periodTimes">09:00 - 10:15</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-h2" style="height: 100%" colspan="1" data-period-code="H2">
+        <div class="periodTimes">10:30 - 11:45</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-ht" style="height: 100%" colspan="2" data-period-code="HT">
+        <div class="periodTimes">11:45 - 12:00</div>
+    <div class="periodClassCode">Tutorial (A 1-18)</div>
+    <div class="pull-left periodClassStaff"> K Strickleton </div>
+    <div class="periodClassRoom pull-right">B317</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="Tutorial (A 1-18)"></div>    </td>
+<td id="timetable-cell-h3" style="height: 100%" colspan="2" data-period-code="H3">
+        <div class="periodTimes">12:00 - 13:00</div>
+    <div class="periodClassCode">Physics</div>
+    <div class="pull-left periodClassStaff"> I Udall </div>
+    <div class="periodClassRoom pull-right">B325</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Physics (PHA2-C1-18)"></div>    </td>
+<td id="timetable-cell-hl" style="height: 100%" colspan="2" data-period-code="HL">
+        <div class="periodTimes">13:00 - 13:50</div>
+    <div class="periodClassCode">Lunch</div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-h4" style="height: 100%" colspan="1" data-period-code="H4">
+        <div class="periodTimes">13:50 - 14:50</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-h5" style="height: 100%" colspan="1" data-period-code="H5">
+        <div class="periodTimes">15:00 - 16:00</div>
+    <div class="periodClassCode">RE</div>
+    <div class="pull-left periodClassStaff"> R Ripley </div>
+    <div class="periodClassRoom pull-right">B125</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="Religious Education - Upper Sixth (RE1U-5H-18)"></div>    </td></tr><tr><th>Friday</th>
+<td id="timetable-cell-f1" style="height: 100%" colspan="1" data-period-code="F1">
+        <div class="periodTimes">09:00 - 10:15</div>
+    <div class="periodClassCode">Maths</div>
+    <div class="pull-left periodClassStaff"> D Overland </div>
+    <div class="periodClassRoom pull-right">J111</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Mathematics  (MAA2-E2-18)"></div>    </td>
+<td id="timetable-cell-f2" style="height: 100%" colspan="1" data-period-code="F2">
+        <div class="periodTimes">10:30 - 11:45</div>
+    <div class="periodClassCode">Maths</div>
+    <div class="pull-left periodClassStaff"> D Overland </div>
+    <div class="periodClassRoom pull-right">J111</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Mathematics  (MAA2-E2-18)"></div>    </td>
+<td id="timetable-cell-fm" style="height: 100%" colspan="2" data-period-code="FM">
+        <div class="periodTimes">11:45 - 12:00</div>
+    <div class="periodClassCode">Meeting Time</div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-f3" style="height: 100%" colspan="2" data-period-code="F3">
+        <div class="periodTimes">12:00 - 13:05</div>
+    <div class="periodClassCode">Computing</div>
+    <div class="pull-left periodClassStaff"> J Mohammed </div>
+    <div class="periodClassRoom pull-right">E421</div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title="GCE A Level Computing (CGA2-F1-18)"></div>    </td>
+<td id="timetable-cell-fl" style="height: 100%" colspan="2" data-period-code="FL">
+        <div class="periodTimes">13:05 - 13:50</div>
+    <div class="periodClassCode">Lunch</div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-f4" style="height: 100%" colspan="1" data-period-code="F4">
+        <div class="periodTimes">13:50 - 14:50</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td>
+<td id="timetable-cell-f5" style="height: 100%" colspan="1" data-period-code="F5">
+        <div class="periodTimes">15:00 - 16:00</div>
+    <div class="periodClassCode"></div>
+    <div class="pull-left periodClassStaff"></div>
+    <div class="periodClassRoom pull-right"></div>
+    <div class="marks-overlay mark-default" data-toggle="tooltip" title=""></div>    </td></tr></tbody></table></div>
+<div style="margin-top: 0.5em"><strong>Note:</strong> Any changes made to the timetable today will not appear until tomorrow.</div>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"b15b3b7431","applicationID":"33024754","transactionName":"NVcEMRECWxdYVhEKCQwdJRAQF1oJFlQRFwMMVgcLAAYaEFBYABcHAF4DShAXQABcWxE0AwdZ","queueTime":0,"applicationTime":136,"atts":"GRAHR1kYSBk=","errorBeacon":"bam.nr-data.net","agent":""}</script>

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    {% for day, lessons in student.timetable.items %}
+      <table class="table table-striped table-dark">
+
+      <thead>
+        <tr>
+          <th scope="col">{{ day|title }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for lesson in lessons %}
+
+          {% if lesson.subject %}
+            <tr>
+              <th scope="row">{{ lesson.time }}</th>
+              <td>{{ lesson.subject }}</td>
+              <td>{{ lesson.teacher }}</td>
+              <td>{{ lesson.room }}</td>
+            </tr>
+          {% endif %}
+
+        {% endfor %}
+      </tbody>
+
+      </table>
+    {% endfor %}
+
+{% endblock %}

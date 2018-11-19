@@ -11,7 +11,7 @@ from .scraper import LandingPageParser, valid_user
 class HomePageView(TemplateView):
     """HomePageView: default view of the landing page."""
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         if request.session.get('authenticated'):
             print('Authentication check successful!')
             user = next(serializers.deserialize(
@@ -22,21 +22,36 @@ class HomePageView(TemplateView):
             student.pop('_state')
             request.session['student'] = student
             return render(
-                request, "dashboard.html", context=dict(request.session)
+                request, 'dashboard.html', context=dict(request.session)
             )
         else:
             print('Authentication check failed...')
-            return redirect("/sign-in")
+            return redirect('/sign-in')
+
+
+class TimetableView(TemplateView):
+    """TimetableView: view of the student's timetable."""
+
+    def get(self, request):
+        if (
+            request.session.get('authenticated') and
+            request.session.get('student')
+        ):
+            return render(
+                request, 'timetable.html', context=dict(request.session)
+            )
+        else:
+            return redirect('/sign-in')
 
 
 class SignInView(TemplateView):
     """SignInView: view for the sign in page."""
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         if request.session.get('authenticated'):
             return redirect('/')
         else:
-            return render(request, "sign-in.html", context=None)
+            return render(request, 'sign-in.html', context=None)
 
     def post(self, request):
         username, password = (
@@ -58,15 +73,15 @@ class SignInView(TemplateView):
             print('Incorrect credentials.')
             request.session['authenticated'] = False
 
-        return render(request, "sign-in.html", context=None)
+        return render(request, 'sign-in.html', context=None)
 
 
 class SignOutView(TemplateView):
     """SignOutView: view for the sign out page."""
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         if request.session.get('authenticated'):
             request.session['authenticated'] = False
             return redirect('/sign-in')
         else:
-            return redirect("/sign-in")
+            return redirect('/sign-in')

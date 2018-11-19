@@ -44,16 +44,37 @@ class LandingPageParser:
         self.student.short_timetable = timetable
 
     def _get_timetable(self):
-        """Get the first day of the week, and post to the endpoint."""
+        """Get the timetable for the current week."""
+        timetable = {
+            'Monday': [],
+            'Tuesday': [],
+            'Wednesday': [],
+            'Thursday': [],
+            'Friday': []
+        }
+        day_meta = '<th>{0}(.*?)(<th>|</script>)'
+        lesson_meta = (
+            'Times">(?P<time>[0-9: -]*)'
+            '<.+?Code">(?P<subject>[A-Za-z() -]*)'
+            '<.+?Staff"> *?(?P<teacher>[A-Za-z ]*) *?'
+            '<.+?right">(?P<room>[A-Z0-9]*)'
+        )
         now = datetime.now()
         start = now - timedelta(days=now.weekday())
         start = start.strftime('%Y-%m-%d')
-        response: bytes = requests.get(
+        response: bytes = requests.post(
             f'{endpoint}attendance/timetable/studentWeek',
-            params={'week': start, 'student_user_id': self.user_id},
-            auth=(self.user.username, self.user.password)
+            data={'week': start, 'student_user_id': self.user_id},
+            auth=(self.user.username, self.user.password),
+            headers={'X-Requested-With': 'XMLHttpRequest'}
         ).content
-        return response
+        for day, lesson in timetable.items():
+            content = re.search(
+                day_meta.format(day).encode(), response, re.DOTALL
+            ).group(1).decode()
+            for match in re.finditer(lesson_meta, content, re.DOTALL):
+                lesson.append(match.groupdict())
+        self.student.timetable = timetable
 
     def __init__(self, user: User, path: Optional[str] = None):
         if path is None:
@@ -78,6 +99,7 @@ class LandingPageParser:
             'tutor': b'Tutor: </dt> <dd> (.*?) </dd>'
         }
         self.threads.add(Thread(target=self._get_short_timetable))
+        self.threads.add(Thread(target=self._get_timetable))
         for key, pattern in patterns.items():
             self.threads.add(
                 Thread(
