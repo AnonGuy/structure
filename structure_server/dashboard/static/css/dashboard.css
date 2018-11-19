@@ -2,6 +2,12 @@ body {
   font-size: .875rem;
 }
 
+.selected {
+  color: black;
+  background: white;
+  background-color: white;
+}
+
 .feather {
   width: 16px;
   height: 16px;
