@@ -75,7 +75,7 @@ Using procedural thinking, I have broken down my solution into five main problem
 * **Web Scraper**
    * The Web Scraper will be the system that communicates with MyLoreto. It will utilize the `requests` library to
    authenticate a MyLoreto session, and scrape the relevant HTML elements such as timetabled lessons, markbook grades
-   and attendance data.
+   and attendance data, with the `re` library to match Regular Expressions.
 * **Django Webserver**
    * ​
 * **Object-relational Mapper**
