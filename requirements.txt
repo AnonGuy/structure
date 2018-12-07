@@ -20,7 +20,7 @@ flake8-todo==0.7
 gitdb2==2.0.5
 GitPython==2.1.11
 idna==2.8
-ipython==7.1.1
+ipython==7.2.0
 ipython-genutils==0.2.0
 jedi==0.13.1
 mccabe==0.6.1
