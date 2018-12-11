@@ -70,7 +70,7 @@ Show My Homework is a service designed for schools, that aims to unify student t
 
 ### Decomposing the Problem
 
-![image](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDecomposition.png?raw=true)
+![image](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureDecomposition.png?raw=true)
 Using procedural thinking, I have broken down my solution into five main problems: 
 * **Web Scraper**
    * The Web Scraper will be the system that communicates with MyLoreto. It will utilize the `requests` library to
@@ -87,7 +87,7 @@ Using procedural thinking, I have broken down my solution into five main problem
 
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
-|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/devel/write_up/images/StructureDataFlow.png?raw=true) Users communicate with the system via the Mobile Client and online Dashboard.|
+|![](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureDataFlow.png?raw=true) Users communicate with the system via the Mobile Client and online Dashboard.|
 
 ### Questions to ask
 
