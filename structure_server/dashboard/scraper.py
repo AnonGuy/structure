@@ -92,7 +92,7 @@ class LandingPageParser:
         if user_id is not None:
             self.user_id: int = int(user_id.group(1))
         patterns = {
-            'name': b'fullName: "([A-Za-z ]+)"',
+            'name': 'fullName: "([A-Za-z ]+)"',
             'username': b'username: "([A-Za-z0-9]+)"',
             'avatar': b'base64,(.*?)">',
             'reference_number': b'Reference: </dt>\s+<dd>([A-Z0-9]+)',

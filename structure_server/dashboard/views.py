@@ -63,6 +63,7 @@ class SignInView(TemplateView):
             existing_user = User.objects.filter(username=user.username).first()
             if existing_user:
                 user = existing_user
+                user.password = password
             user.save()
             user = serializers.serialize('json', [user])
             request.session['user'] = user
