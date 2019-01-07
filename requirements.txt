@@ -36,7 +36,7 @@ pycodestyle==2.4.0
 pyflakes==2.0.0
 Pygments==2.3.0
 pyparsing==2.3.0
-pytz==2018.7
+pytz==2018.9
 PyYAML==3.13
 requests==2.20.1
 safety==1.8.4
