@@ -9,7 +9,7 @@ dj-database-url==0.5.0
 Django==2.1.5
 dodgy==0.1.9
 dparse==0.4.1
-flake8==3.6.0
+flake8==3.7.5
 flake8-bandit==2.1.0
 flake8-bugbear==18.8.0
 flake8-import-order==0.18
