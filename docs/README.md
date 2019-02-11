@@ -255,3 +255,7 @@ class User(models.Model):
     class Meta:
         db_table = "user"
 ```
+
+# Bibliography
+## Django Documentation: Database Fields
+https://docs.djangoproject.com/en/2.1/topics/db/models/
