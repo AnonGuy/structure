@@ -72,7 +72,7 @@ Show My Homework is a service designed for schools, that aims to unify student t
 ### Decomposing the Problem
 
 ![image](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureDecomposition.png?raw=true)
-Using procedural thinking, I have broken down my solution into five main problems: 
+Using procedural thinking, I have broken down my solution into six main problems: 
 * **Web Scraper**
    * The Web Scraper will be the system that communicates with MyLoreto. It will utilize the `requests` library to
    authenticate a MyLoreto session, and scrape the relevant HTML elements such as timetabled lessons, markbook grades
@@ -81,12 +81,12 @@ Using procedural thinking, I have broken down my solution into five main problem
    * The Webserver will be the system that communicates with the customer. It will utilize the [Django](https://www.djangoproject.com/) backend web framework to handle HTTP requests from multiple users in parallel, and it will dynamically generate unique HTML files for each user, based on defined templates. This system will also render data such as timetabled lessons, in the form of styled HTML elements.
 * **Object-Relational Mapper**
    * An Object-Relational Mapper (ORM) is a library that utilises Object-Oriented Programming (OOP) to abstract complex SQL queries from the developer. For example, with a defined class `User`, `User(name="Jeremiah", age=18).save()` will execute the equivalent SQL statement, `INSERT INTO User (name, age) VALUES ("Jeremiah", 18)`. Although Django provides a builtin ORM for this purpose, I will be writing my own implementation from scratch.
-* **HTTP Application Programming Interface**
-   * 
+* **Web Application Programming Interface**
+   * The server-side API will be an interface providing raw data - for example, a POST request with authorization headers to `/api/student-data` might return JSON-formatted data about the student in question. This will be used for any further client applications, such as a mobile app or desktop feature.
 * **Web Dashboard**
    * The Web Dashboard will be the HTML frontend that will be displayed to the customers. The Django backend will generate this HTML from a defined template, and I will be using a popular frontend web framework, [Bootstrap](https://getbootstrap.com/), to create and style this template. 
 * **Mobile Application**
-   * 
+   * The Mobile application will be a portable client for the Web API. It will be able to retrieve student timetables, add reminders for lessons, add custom timetable entries and add homework notes.
 
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
@@ -130,10 +130,7 @@ structure/
         wsgi.py
     dashboard/
         __init__.py
-        admin.py
         apps.py
-        migrations/
-            __init__.py
         models.py
         tests.py
         views.py
