@@ -220,7 +220,7 @@ structure/
         models.py
         views.py
 ```
-I then edited `dashboard/models.py`, to add some simple database models:
+In order to be able to modify and update my database, I did some research into [the Django documentation](https://github.com/AnonGuy/structure/blob/master/docs/README.md#django-documentation-database-fields) on it's builtin ORM.
 ```python
 """Define database models for use in the PostgreSQL server."""
 
