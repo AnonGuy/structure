@@ -67,6 +67,25 @@ Show My Homework is a service designed for schools, that aims to unify student t
 ![](https://satchel-sw-prod.imgix.net/images/products/timetables/timetables_@2x.png) | ![](https://satchel-sw-prod.imgix.net/images/products/timetables/mobile_timetables_@2x.png) |
 | Fully-featured management system | Minimal features, simple timetable with reminders  |
 
+### Stakeholder Interview Questions
+
+* Have you ever used a homework management system before?
+* If so, what are your favourite features of this system?
+* Are there any features you want to see from a system like this?
+* Are there any features you want removed?
+
+
+### Interview results
+
+#### Have you ever used a homework management system before?
+*Yes, I have used Show My Homework in high school to manage my timetabled lessons and homework.*
+#### If so, what are your favourite features of this system?
+*My favourite feature is the ability to colour-code homework slots depending on whether they are completed or not.*
+#### Are there any features you want to see from a system like this?
+*I would like to see a reminder system, such as push notifications for due homework.*
+#### Are there any features you want removed?
+*I do not like Show My Homework's "my calendar" system, and would like it to display more accurate time stamps.*
+
 # Design
 
 ### Decomposing the Problem
@@ -91,13 +110,6 @@ Using procedural thinking, I have broken down my solution into six main problems
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
 |![](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureDataFlow.png?raw=true) Users communicate with the system via the Mobile Client and online Dashboard.|
-
-### Questions to ask
-
-* Have you ever used a homework management system before?
-* If so, what are your favourite features of this system?
-* Are there any features you want to see from a system like this?
-* Are there any features you want removed?
 
 # Version 1
 
