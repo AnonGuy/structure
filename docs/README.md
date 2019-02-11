@@ -163,3 +163,4 @@ def valid_user(*credentials: str) -> bool:
     ).status_code == 200
 ```
 This function checks that the HTTP response code for a request with the provided credentials is successful.
+With some simple validation and webscraping done, I then decided to start work on the main webserver.
