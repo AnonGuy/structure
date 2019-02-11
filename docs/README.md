@@ -113,7 +113,29 @@ Using procedural thinking, I have broken down my solution into six main problems
 
 # Version 1
 
-I started by creating a simple script that will allow me to request and parse data from MyLoreto. I have decided to use the `requests` library to handle HTTP requests and responses, and the `re` builtin module to parse the content with regular expressions. An example prototype is below:
+I started by creating a simple script that will allow me to request and parse data from MyLoreto. I have decided to use the `requests` library to handle HTTP requests and responses, and the `re` builtin module to parse the content with regular expressions.
+
+I will be using Regular Expression patterns to catch certain substrings of a HTTP response. For example, from this snippet of HTML:
+```html
+	<dl class="dl-horizontal" style="font-size: 0.9em">
+		<dt>Reference: </dt>
+		<dd>S20170000420</dd>
+	</dl>
+```
+I am able to catch the Reference number with the following regex pattern: `Reference: </dt>\s+<dd>([A-Z0-9]+)`
+The `\s+` represents one or more whitespace characters, and the `[A-Z0-9]+` represents one or more capital alphanumeric characters.
+```python
+>>> html = """
+... 	<dl class="dl-horizontal" style="font-size: 0.9em">
+... 		<dt>Reference: </dt>
+... 		<dd>S20170000420</dd>
+... 	</dl>"""
+
+>>> match = re.search(r'Reference: </dt>\s+<dd>([A-Z0-9]+)', html)
+>>> match.group(1)
+'S20170000420'
+```
+An example prototype of the script is below:
 ```python
 import re
 
@@ -146,7 +168,7 @@ An example of this function is use can be seen below:
     'name': b'Jeremiah Boby',
     'username': b'JerBob42',
     'avatar': b'/9j/4AAQSkZJRgABAQEASABIAAD...',
-    'reference_number': 'S2042017...',
+    'reference_number': 'S20170000420',
     'tutor': 'Mr Bloggs'
 }
 ```
