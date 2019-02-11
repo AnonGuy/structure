@@ -191,3 +191,32 @@ With some simple validation and webscraping done, I then decided to start work o
 $ django-admin startproject structure
 ```
 
+This created a directory with the following structure:
+
+```
+structure/
+    manage.py
+    structure/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+```
+In order to comply with separation of concerns, I have decided to implement my student dashboard as a separate module in the project, to be named `dashboard`. To do this, I used the following command:
+```bash
+$ python manage.py startapp dashboard
+```
+I then removed all redundant files which were not required for the project. This resulted in the following directory structure:
+```
+structure/
+    manage.py
+    structure/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+    dashboard/
+        __init__.py
+        models.py
+        views.py
+```
