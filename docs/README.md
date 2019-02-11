@@ -8,7 +8,8 @@ for their chosen university. Many Loreto college students have issues with organ
 timetable. For example, creating study sessions that do not clash with classes, or setting up
 reminders for each of these study sessions, can be difficult. The needs of a College student also include
 regularly checking up on their performance (grades, attendance) to ensure that they are making the
-best of their study periods.
+best of their study periods. <br>
+I have chosen a fellow Computer Science student, Troy Sherlock, to be my stakeholder for this project. Troy is an ideal candidate for my software, as he is currently in his second year of A Levels with Maths, Physics and Computer Science. This means that efficient organisation of free study periods is vital, so he will benefit greatly from my solution.
 
 The current system for acheiving these tasks is the following:
 * Checking the current timetable
@@ -75,15 +76,17 @@ Using procedural thinking, I have broken down my solution into five main problem
 * **Web Scraper**
    * The Web Scraper will be the system that communicates with MyLoreto. It will utilize the `requests` library to
    authenticate a MyLoreto session, and scrape the relevant HTML elements such as timetabled lessons, markbook grades
-   and attendance data, with the `re` library to match Regular Expressions.
+   and attendance data, with the `re` library to match [HTML Regular Expressions](https://stackoverflow.com/a/1732454).
 * **Django Webserver**
-   * ​
-* **Object-relational Mapper**
-   * ​
+   * The Webserver will be the system that communicates with the customer. It will utilize the [Django](https://www.djangoproject.com/) backend web framework to handle HTTP requests from multiple users in parallel, and it will dynamically generate unique HTML files for each user, based on defined templates. This system will also render data such as timetabled lessons, in the form of styled HTML elements.
+* **Object-Relational Mapper**
+   * An Object-Relational Mapper (ORM) is a library that utilises Object-Oriented Programming (OOP) to abstract complex SQL queries from the developer. For example, with a defined class `User`, `User(name="Jeremiah", age=18).save()` will execute the equivalent SQL statement, `INSERT INTO User (name, age) VALUES ("Jeremiah", 18)`. Although Django provides a builtin ORM for this purpose, I will be writing my own implementation from scratch.
+* **HTTP Application Programming Interface**
+   * 
 * **Web Dashboard**
-   * ​
-* **Mobile Application.**
-   * ​
+   * The Web Dashboard will be the HTML frontend that will be displayed to the customers. The Django backend will generate this HTML from a defined template, and I will be using a popular frontend web framework, [Bootstrap](https://getbootstrap.com/), to create and style this template. 
+* **Mobile Application**
+   * 
 
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
@@ -112,11 +115,11 @@ structure/
         urls.py
         wsgi.py
 ```
-In order to comply with separation of concerns, I decided to implement my student dashboard as a separate module in the project, named `dashboard`. To do this, I used the following command:
+In order to comply with separation of concerns, I decided to implement my student dashboard as a separate module in the project, named `dashboard`. To do this, I used the following command to generate the skeleton project:
 ```
 $ python manage.py startapp dashboard
 ```
-This resulted in the following directory structure:
+And removed all files that were irrelevant to my project. This resulted in the following directory structure:
 ```
 structure/
     manage.py
