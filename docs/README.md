@@ -185,4 +185,9 @@ def valid_user(*credentials: str) -> bool:
     ).status_code == 200
 ```
 This function checks that the HTTP response code for a request with the provided credentials is successful.
-With some simple validation and webscraping done, I then decided to start work on the main webserver.
+With some simple validation and webscraping done, I then decided to start work on the main webserver. To begin with, I used the `django-admin` command-line tool to generate the skeleton project required for the webserver:
+
+```bash
+$ django-admin startproject structure
+```
+
