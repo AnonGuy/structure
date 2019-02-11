@@ -7,7 +7,7 @@ from typing import Optional
 
 import requests
 
-from .models import Student, User
+from dashboard.models import Student, User
 
 endpoint = "https://my.loreto.ac.uk/"
 
@@ -95,7 +95,7 @@ class LandingPageParser:
             'name': b'fullName: "([A-Za-z ]+)"',
             'username': b'username: "([A-Za-z0-9]+)"',
             'avatar': b'base64,(.*?)">',
-            'reference_number': b'Reference: </dt>\s+<dd>([A-Z0-9]+)',
+            'reference_number': br'Reference: </dt>\s+<dd>([A-Z0-9]+)',
             'tutor': b'Tutor: </dt> <dd> (.*?) </dd>'
         }
         self.threads.add(Thread(target=self._get_short_timetable))

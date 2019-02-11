@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
 from .models import User
-from .scraper import LandingPageParser, valid_user
+from scraper import LandingPageParser, valid_user
 
 
 class HomePageView(TemplateView):
@@ -33,10 +33,10 @@ class TimetableView(TemplateView):
     """TimetableView: view of the student's timetable."""
 
     def get(self, request):
-        if (
-            request.session.get('authenticated') and
+        if all((
+            request.session.get('authenticated'),
             request.session.get('student')
-        ):
+        )):
             return render(
                 request, 'timetable.html', context=dict(request.session)
             )
@@ -63,6 +63,7 @@ class SignInView(TemplateView):
             existing_user = User.objects.filter(username=user.username).first()
             if existing_user:
                 user = existing_user
+                user.password = password
             user.save()
             user = serializers.serialize('json', [user])
             request.session['user'] = user
