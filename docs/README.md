@@ -100,13 +100,13 @@ Using procedural thinking, I have broken down my solution into five main problem
 
 I started by generating the boilerplate Django project with the following command:
 ```bash
-$ django-admin startproject structure_server
+$ django-admin startproject structure
 ```
 This created the following directory structure:
 ```
-structure_server/
+structure/
     manage.py
-    structure_server/
+    structure/
         __init__.py
         settings.py
         urls.py
@@ -118,9 +118,9 @@ $ python manage.py startapp dashboard
 ```
 This resulted in the following directory structure:
 ```
-structure_server/
+structure/
     manage.py
-    structure_server/
+    structure/
         __init__.py
         settings.py
         urls.py

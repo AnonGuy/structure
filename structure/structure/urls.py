@@ -1,4 +1,4 @@
-"""structure_server URL Configuration."""
+"""structure URL Configuration."""
 
 from django.urls import include, path
 

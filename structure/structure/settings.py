@@ -1,4 +1,4 @@
-"""Django settings for the structure_server project."""
+"""Django settings for the structure project."""
 
 import base64
 import os
@@ -39,7 +39,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 
-ROOT_URLCONF = "structure_server.urls"
+ROOT_URLCONF = "structure.urls"
 
 TEMPLATES = [
     {
@@ -57,7 +57,7 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "structure_server.wsgi.application"
+WSGI_APPLICATION = "structure.wsgi.application"
 
 
 # Database {{{
