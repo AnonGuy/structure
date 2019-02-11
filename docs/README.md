@@ -113,37 +113,50 @@ Using procedural thinking, I have broken down my solution into six main problems
 
 # Version 1
 
-I started by generating the boilerplate Django project with the following command:
-```bash
-$ django-admin startproject structure
+I started by creating a simple script that will allow me to request and parse data from MyLoreto. I have decided to use the `requests` library to handle HTTP requests and responses, and the `re` builtin module to parse the content with regular expressions. An example prototype is below:
+```python
+import re
+
+import requests
+
+
+endpoint = "https://my.loreto.ac.uk/"
+
+patterns = {
+    'name': b'fullName: "([A-Za-z ]+)"',
+    'username': b'username: "([A-Za-z0-9]+)"',
+    'avatar': b'base64,(.*?)">',
+    'reference_number': br'Reference: </dt>\s+<dd>([A-Z0-9]+)',
+    'tutor': b'Tutor: </dt> <dd> (.*?) </dd>'
+}
+
+
+def get_student_data(*credentials: str) -> dict:
+    """Get data about a student, given their username and password."""
+    student_data = {}
+    landing_page = requests.get(endpoint, auth=credentials).content
+    for key, pattern in patterns.items():
+        student_data[key] = re.search(pattern, landing_page).group(1)
+    return student_data
 ```
-This created the following directory structure:
+An example of this function is use can be seen below:
+```python
+>>> get_student_data('jerbob42', 'password')
+{
+    'name': b'Jeremiah Boby',
+    'username': b'JerBob42',
+    'avatar': b'/9j/4AAQSkZJRgABAQEASABIAAD...',
+    'reference_number': 'S2042017...',
+    'tutor': 'Mr Bloggs'
+}
 ```
-structure/
-    manage.py
-    structure/
-        __init__.py
-        settings.py
-        urls.py
-        wsgi.py
+I also decided to create a method for use in validating MyLoreto credentials:
+```python
+def valid_user(*credentials: str) -> bool:
+    """Take a student's credentials and validate them."""
+    print('Validating user...')
+    return requests.get(
+        endpoint, auth=credentials
+    ).status_code == 200
 ```
-In order to comply with separation of concerns, I decided to implement my student dashboard as a separate module in the project, named `dashboard`. To do this, I used the following command to generate the skeleton project:
-```
-$ python manage.py startapp dashboard
-```
-And removed all files that were irrelevant to my project. This resulted in the following directory structure:
-```
-structure/
-    manage.py
-    structure/
-        __init__.py
-        settings.py
-        urls.py
-        wsgi.py
-    dashboard/
-        __init__.py
-        apps.py
-        models.py
-        tests.py
-        views.py
-```
+This function checks that the HTTP response code for a request with the provided credentials is successful.
