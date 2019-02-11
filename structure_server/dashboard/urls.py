@@ -1,6 +1,4 @@
-"""
-Dashboard app URL Configuration.
-"""
+"""Dashboard app URL Configuration."""
 
 from dashboard import views
 
