@@ -150,6 +150,9 @@ An example of this function is use can be seen below:
     'tutor': 'Mr Bloggs'
 }
 ```
+### Potential Improvement
+**I could improve this function's performance by utilising Python's builtin `threading` module, starting a new `Thread` for each regex search that I start. This means that each regex search will not block the execution of the next.**
+
 I also decided to create a method for use in validating MyLoreto credentials:
 ```python
 def valid_user(*credentials: str) -> bool:
