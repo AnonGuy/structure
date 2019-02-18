@@ -3,24 +3,29 @@
 ### Problem Definition and Stakeholders
 
 The stakeholders of my application will be **fellow students of Loreto Sixth Form College**.
-Being students, they need to organize revision sessions, in order to maintain the grades required
-for their chosen university. Many Loreto college students have issues with organising a revision
-timetable. For example, creating study sessions that do not clash with classes, or setting up
-reminders for each of these study sessions, can be difficult. The needs of a College student also include
-regularly checking up on their performance (grades, attendance) to ensure that they are making the
-best of their study periods. <br>
-I have chosen a fellow Computer Science student, Troy Sherlock, to be my stakeholder for this project. Troy is an ideal candidate for my software, as he is currently in his second year of A Levels with Maths, Physics and Computer Science. This means that efficient organisation of free study periods is vital, so he will benefit greatly from my solution.
+Being A Level students, they need to organize revision sessions, in order to maintain the grades
+required for their chosen university. Many Loreto college students have issues with organising a
+revision timetable.
+For example, creating study sessions that do not clash with classes, or setting up
+reminders for each of these study sessions. The needs of a College student also include regularly
+checking up on their performance
+(grades, attendance) to ensure that they are making the best of their study periods. <br>
 
-The current system for acheiving these tasks is the following:
+I have chosen a fellow Computer Science student, Troy Sherlock, to be my stakeholder for this
+project. Troy is an ideal candidate for my software, as he is currently in his second year of A
+Levels with Maths, Physics and Computer Science. This means that efficient organisation of free
+study periods is vital, so he will benefit greatly from my solution.
+
+The current system for achieving these tasks is the following:
 * Checking the current timetable
 * Checking grades and subject performance
 * Use this information to create a manual revision timetable
 * Regularly update this timetable manually based on performance
 
-The issue with this system is that it is entirely manual, which means that students may neglect to create
-or update a revision timetable. Also, the current system does not allow srudents to add their own custom
-lessons, or be notified for a lesson. My idea is to have a user-friendly system that integrates all these 
-features, in one easy to use web application.
+The issue with this system is that it is entirely manual, which means that students may neglect
+to create or update a revision timetable. Also, the current system does not allow students to add
+their own custom lessons, or be notified for a lesson. My idea is to have a user-friendly system
+that integrates all these features, in one easy to use web application.
 
 My application will solve this problem, by **integrating revision session management**, **homework
 reminders** and **performance analysis** in one simple dashboard. Students will be able to access this
@@ -30,6 +35,7 @@ In order to solve this problem with the suggested solution, I will need to learn
 * Usage of the Django web framework
 * Usage of the PostgreSQL Database Management System with Python
 * Usage of JavaScript graphing libraries such as D3.js
+* Use of the Dart standard library, and usage with Flutter
 
 ### Justification for Computational Method
 
@@ -60,7 +66,8 @@ I found a service that is a similar solution to my own, **showmyhomework.co.uk**
 
 #### Show my Homework
 
-Show My Homework is a service designed for schools, that aims to unify student timetables, homework tasks and revision session management.
+Show My Homework is a service designed for schools, that aims to unify student timetables,
+homework tasks and revision session management.
 
 |    Online Dashboard      |    Mobile Application    |
 |:------------------------:|:------------------------:|
@@ -75,8 +82,7 @@ Show My Homework is a service designed for schools, that aims to unify student t
 * Are there any features you want removed?
 
 
-### Interview results
-
+### Interview results: Troy Sherlock
 #### Have you ever used a homework management system before?
 *Yes, I have used Show My Homework in high school to manage my timetabled lessons and homework.*
 #### If so, what are your favourite features of this system?
@@ -111,9 +117,13 @@ Using procedural thinking, I have broken down my solution into six main problems
 |:----------------------:|:-----------------:|
 |![](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureDataFlow.png?raw=true) Users communicate with the system via the Mobile Client and online Dashboard.|
 
+### Key Variables
+
+
 # Version 1
 
-I started by creating a simple script that will allow me to request and parse data from MyLoreto. I have decided to use the `requests` library to handle HTTP requests and responses, and the `re` builtin module to parse the content with regular expressions.
+I started by creating a simple script that will allow me to request and parse data from MyLoreto.
+I have decided to use the `requests` library to handle HTTP requests and responses, and the `re` builtin module to parse the content with regular expressions.
 
 I will be using Regular Expression patterns to catch certain substrings of a HTTP response. For example, from this snippet of HTML:
 ```html
@@ -221,6 +231,7 @@ structure/
         views.py
 ```
 In order to be able to modify and update my database, I did some research into [the Django documentation](https://github.com/AnonGuy/structure/blob/master/docs/README.md#django-documentation-database-fields) on it's builtin ORM.
+Though I will be implementing my own custom ORM for this project, I have decided to use the builtin ORM until the next iteration of development.
 
 ```python
 """Define database models for use in the PostgreSQL server."""
@@ -255,149 +266,6 @@ class User(models.Model):
 
     class Meta:
         db_table = "user"
-```
-
-# Version 2
-
-I updated the webscraper script so that it is completely multithreaded, running regex searches in paralell to apply concurrent programming:
-
-```python
-"""Define various webscraping methods."""
-
-import re
-from datetime import datetime, timedelta
-from threading import Thread
-from typing import Optional
-
-import requests
-
-from dashboard.models import Student, User
-
-endpoint = "https://my.loreto.ac.uk/"
-
-
-class LandingPageParser:
-    """Class for parsing the Loreto landing page."""
-
-    def _set_regex_group(self, page: bytes, name: str, pattern: bytes):
-        """Set the Student data to the first group of the given match."""
-        match = re.search(pattern, page)
-        if match is not None:
-            self.student.__setattr__(name, match.group(1).decode())
-
-    def _get_short_timetable(self):
-        """Get the timetable for the current day."""
-        timetable = []
-        pattern = re.compile(
-            b'TimetableEntry .*?>(?P<time>[0-9 -:]+)'
-            b'.*?(?P<room>[()A-Z0-9]+)'
-            b'.*?(?P<teacher>[()A-Za-z0-9 -]+) ',
-            re.DOTALL
-        )
-        for time, room, teacher in pattern.findall(self.page):
-            room = room.strip(b'()')
-            subject, teacher = teacher.split(b' - ')
-            timetable.append(
-                {
-                    'time': time.decode(),
-                    'room': room.decode(),
-                    'subject': subject.decode(),
-                    'teacher': teacher.decode()
-                }
-            )
-        self.student.short_timetable = timetable
-
-    def _get_timetable(self):
-        """Get the timetable for the current week."""
-        timetable = {
-            'Monday': [],
-            'Tuesday': [],
-            'Wednesday': [],
-            'Thursday': [],
-            'Friday': []
-        }
-        day_meta = '<th>{0}(.*?)(<th>|</script>)'
-        lesson_meta = (
-            'Times">(?P<time>[0-9: -]*)'
-            '<.+?Code">(?P<subject>[A-Za-z() -]*)'
-            '<.+?Staff"> *?(?P<teacher>[A-Za-z ]*) *?'
-            '<.+?right">(?P<room>[A-Z0-9]*)'
-        )
-        now = datetime.now()
-        start = now - timedelta(days=now.weekday())
-        start = start.strftime('%Y-%m-%d')
-        response: bytes = requests.post(
-            f'{endpoint}attendance/timetable/studentWeek',
-            data={'week': start, 'student_user_id': self.user_id},
-            auth=(self.user.username, self.user.password),
-            headers={'X-Requested-With': 'XMLHttpRequest'}
-        ).content
-        for day, lesson in timetable.items():
-            content = re.search(
-                day_meta.format(day).encode(), response, re.DOTALL
-            ).group(1).decode()
-            for match in re.finditer(lesson_meta, content, re.DOTALL):
-                lesson.append(match.groupdict())
-        self.student.timetable = timetable
-
-    def __init__(self, user: User, path: Optional[str] = None):
-        if path is None:
-            self.page = requests.get(
-                endpoint, auth=(user.username, user.password)
-            ).content
-        else:
-            self.page = open(path, 'rb').read()
-        self.user = user
-        self.threads: set = set()
-        self.student: Student = Student()
-        user_id = re.search(
-            br'UserId = "(\d+)"', self.page
-        )
-        if user_id is not None:
-            self.user_id: int = int(user_id.group(1))
-        patterns = {
-            'name': b'fullName: "([A-Za-z ]+)"',
-            'username': b'username: "([A-Za-z0-9]+)"',
-            'avatar': b'base64,(.*?)">',
-            'reference_number': br'Reference: </dt>\s+<dd>([A-Z0-9]+)',
-            'tutor': b'Tutor: </dt> <dd> (.*?) </dd>'
-        }
-        self.threads.add(Thread(target=self._get_short_timetable))
-        self.threads.add(Thread(target=self._get_timetable))
-        for key, pattern in patterns.items():
-            self.threads.add(
-                Thread(
-                    target=self._set_regex_group,
-                    args=(self.page, key, pattern)
-                )
-            )
-
-    def parse(self) -> Student:
-        """Parse the webpage content and return the resulting Student."""
-        for thread in self.threads:
-            thread.start()
-        for thread in self.threads:
-            thread.join()
-        self.student.email = '{0}@student.loreto.ac.uk'.format(
-            self.student.username
-        )
-        return self.student
-
-
-def valid_user(user: User) -> bool:
-    """Take a User object and validate credentials."""
-    print('Validating user...')
-    return requests.get(
-        endpoint, auth=(user.username, user.password)
-    ).status_code == 200
-
-
-def create_student(user: User) -> Student:
-    """Take a User object and intialize a Student object."""
-    parser = LandingPageParser(user)
-    student = parser.parse()
-    print('Created student:', repr(student.name))
-    return student
 ```
 
 # Bibliography
