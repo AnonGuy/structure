@@ -633,6 +633,187 @@ This resulted in the following web page:
 
 ![Signin example](https://github.com/AnonGuy/Structure/blob/master/docs/images/SigninProof.png)
 
+When the user enters their username and password, these parameters are sent as part of the POST request to the same endpoint.
+This will execute the following code:
+```python
+def post(self, request):
+    """Runs on a HTTP POST request."""
+    # Get the username and password from the POST request
+    username, password = (
+        request.POST.get('username'), request.POST.get('password')
+    )
+    # Create a User object with the username and password
+    user = User(username=username, password=password)
+    # Validate the user object
+    if valid_user(user.username, user.password):
+        # If the current user is valid, add the user to the session
+        current_session['user'] = user
+        # Set the "authenticated" flag to True
+        current_session['authenticated'] = True
+        # Redirect to the home page
+        return redirect('/')
+    else:
+        # If the current user is not valid, set the "authenticated" flag to False:
+        current_session['authenticated'] = False
+    # If there has been no previous returns, render the signin page
+    return render(request, "sign-in.html", context=None)
+```
+
+### Potential Improvement
+**Currently, I am relying on the mutability of a global variable. This is unreliable, as it will only work for one user at a time. It is not scalable, nor lend itself to concurrent thinking. Instead, I could use Django's builtin `request.session` object, which is unique for each request, as it is an attribute of one parameter of the request method.**
+
+However, this does not store user details. Instead, it only stores a global `authenticated` flag.
+
+In order to display student information, I will need to add more information to the scraper. In order to acheieve this, I decided
+to create a custom class, which I will use solely to parse the MyLoreto landing page.
+
+There are several reasons why I have decided to use a class for parsing the landing page:
+
+* It allows me to create a combination of variables, methods and statements that I can reproduce whenever I need to.
+* It allows me to import this class into any module I need, lending to **modular thinking**.
+* It helps with separation of concerns, as all variables and methods will only have the scope of the instance it applies to.
+* It creates more readable, maintainable code, as I write less and document more.
+
+
+
+The class is defined as follows:
+```python
+class LandingPageParser:
+    """Class for parsing the Loreto landing page."""
+
+    def _set_regex_group(self, page: bytes, name: str, pattern: bytes):
+        """Set the Student data to the first group of the given match."""
+        match = re.search(pattern, page)
+        if match is not None:
+            # If the Regex match was successful
+            self.student.__setattr__(name, match.group(1).decode())
+
+    def _get_short_timetable(self):
+        """Get the timetable for the current day."""
+        # List of lessons in the current day.
+        timetable = []
+        # Regular Expression pattern for a lesson.
+        pattern = re.compile(
+            b'TimetableEntry .*?>(?P<time>[0-9 -:]+)'
+            b'.*?(?P<room>[()A-Z0-9]+)'
+            b'.*?(?P<teacher>[()A-Za-z0-9 -]+) ',
+            re.DOTALL
+        )
+        # Iterate each attribute of every lesson in the timetable
+        for time, room, teacher in pattern.findall(self.page):
+            # Remove brackets from the lesson
+            room = room.strip(b'()')
+            subject, teacher = teacher.split(b' - ')
+            # Append this lesson dictionary to the list
+            timetable.append(
+                {
+                    'time': time.decode(),
+                    'room': room.decode(),
+                    'subject': subject.decode(),
+                    'teacher': teacher.decode()
+                }
+            )
+        # Set the student's timetable to this list
+        self.student.short_timetable = timetable
+
+    def _get_timetable(self):
+        """Get the timetable for the current week."""
+        # Create a dictionary of day -> lesson list
+        timetable = {
+            'Monday': [],
+            'Tuesday': [],
+            'Wednesday': [],
+            'Thursday': [],
+            'Friday': []
+        }
+        # Extract the HTML snippets for each day
+        day_meta = '<th>{0}(.*?)(<th>|</script>)'
+        # Pattern that will be applied to the previous day snippet
+        lesson_meta = (
+            'Times">(?P<time>[0-9: -]*)'
+            '<.+?Code">(?P<subject>[A-Za-z() -]*)'
+            '<.+?Staff"> *?(?P<teacher>[A-Za-z ]*) *?'
+            '<.+?right">(?P<room>[A-Z0-9]*)'
+        )
+        # Get the Monday of the current week
+        now = datetime.now()
+        start = now - timedelta(days=now.weekday())
+        start = start.strftime('%Y-%m-%d')
+        # Create a HTTP request to MyLoreto with the student's data
+        response: bytes = requests.post(
+            f'{endpoint}attendance/timetable/studentWeek',
+            data={'week': start, 'student_user_id': self.user_id},
+            auth=(self.user.username, self.user.password),
+            headers={'X-Requested-With': 'XMLHttpRequest'}
+        ).content
+        # Iterate each day and lesson list in the timetable
+        for day, lesson in timetable.items():
+            # Extract the content
+            content = re.search(
+                day_meta.format(day).encode(), response, re.DOTALL
+            ).group(1).decode()
+            for match in re.finditer(lesson_meta, content, re.DOTALL):
+                # Append each lesson to the timetable
+                lesson.append(match.groupdict())
+        # Set the parser instance's "timetable" attribute to this timetable
+        self.student.timetable = timetable
+
+    def __init__(self, user: User):
+        # Get the student's landing page with their credentials
+        self.page = requests.get(
+            endpoint, auth=(user.username, user.password)
+        ).content
+        # Set the student and user attributes persistently
+        self.user = user
+        self.student: Student = Student()
+        # Pull the user's UserId with a regular expression
+        user_id = re.search(
+            br'UserId = "(\d+)"', self.page
+        )
+        if user_id is not None:
+            # if the UserId was found:
+            self.user_id: int = int(user_id.group(1))
+        # Define regex patterns for use by core components of the student object.
+        patterns = {
+            'name': b'fullName: "([A-Za-z ]+)"',
+            'username': b'username: "([A-Za-z0-9]+)"',
+            'avatar': b'base64,(.*?)">',
+            'reference_number': br'Reference: </dt>\s+<dd>([A-Z0-9]+)',
+            'tutor': b'Tutor: </dt> <dd> (.*?) </dd>'
+        }
+
+    def parse(self) -> Student:
+        """Parse the webpage content and return the resulting Student."""
+        self._get_short_timetable()
+        self._get_timetable()
+        for key, pattern in patterns.items():
+            self._set_regex_group(self.page, key, pattern)
+        self.student.email = '{0}@student.loreto.ac.uk'.format(
+            self.student.username
+        )
+        return self.student
+
+
+def valid_user(user: User) -> bool:
+    """Take a User object and validate credentials."""
+    print('Validating user...')
+    return requests.get(
+        endpoint, auth=(user.username, user.password)
+    ).status_code == 200
+
+
+def create_student(user: User) -> Student:
+    """Take a User object and intialize a Student object."""
+    parser = LandingPageParser(user)
+    student = parser.parse()
+    print('Created student:', repr(student.name))
+    return student
+```
+I am using regular expressions to extract parts of the HTML page. I use regular expressions for the following reasons:
+* Regular expressions enable me to reduce my code base drastically. If I were to use simple string manipulation to extract the data I need, I would have significantly more **unmaintainable** code.
+* Regular expressions are much easier to read than many different string manipulations.
+* Regular expression patterns are **reusable** once compiled.
+
 # Bibliography
 
 ## Django Documentation: Database Fields
