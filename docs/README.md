@@ -328,7 +328,7 @@ In order to be able to modify and update my database, I did some research into [
 Though I initially decided to create my own ORM for this project, I have made the decision to use Django's builtin ORM to save time on the project. <br>
 If I had more time to enhance this project, I would have written a custom ORM for this purpose.
 
-I described the following database models below:
+I described the following database models below in the `structure/dashboard/models.py` file:
 
 ```python
 """Define database models for use in the PostgreSQL server."""
@@ -367,6 +367,59 @@ class User(models.Model):
         db_table = "user"
 ```
 As you can see, these models do not match the ones that I created during the Design phase. This is because I needed to create a simplified version of the product, so that I was able to test it as soon as possible.
+Next, I added some simple views to run when a user requests pages. These were defined in the `structure/dashboard/views.py` file:
+```python
+from django.shortcuts import redirect, render
+from django.views.generic import TemplateView
+
+from .models import User
+from .scraper import valid_user
+
+
+current_session: dict = {}
+
+
+class HomePageView(TemplateView):
+    """HomePage view: default view of the landing page."""
+
+    def get(self, request, *args, **kwargs):
+        """Runs on a HTTP GET request."""
+        if current_session.get('authenticated'):
+            return render(request, "dashboard.html", context=current_session)
+        else:
+            return redirect("/sign-in")
+
+
+class SignInView(TemplateView):
+    """SignInView: view for the sign in page."""
+
+    def get(self, request, *args, **kwargs):
+        """Runs on a HTTP GET request."""
+        return render(request, "sign-in.html", context=None)
+
+    def post(self, request):
+        """Runs on a HTTP POST request."""
+        username, password = (
+            request.POST.get('username'), request.POST.get('password')
+        )
+        user = User(username=username, password=password)
+        if valid_user(user):
+            current_session['user'] = user
+            current_session['authenticated'] = True
+            redirect('/')
+        else:
+            current_session['authenticated'] = False
+        return render(request, "sign-in.html", context=None)
+```
+As shown above, when a user requests the home page, the following code is executed:
+```python
+def get(self, request, *args, **kwargs):
+    """Runs on a HTTP GET request."""
+    if current_session.get('authenticated'):
+        return render(request, "dashboard.html", context=current_session)
+    else:
+        return redirect("/sign-in")
+```
 
 # Bibliography
 
