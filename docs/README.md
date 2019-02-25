@@ -814,6 +814,61 @@ I am using regular expressions to extract parts of the HTML page. I use regular 
 * Regular expressions are much easier to read than many different string manipulations.
 * Regular expression patterns are **reusable** once compiled.
 
+However, I soon realised that each of these regular expression searches are blocking the thread of execution. Each extraction prevents the next one from being carried out. In order to apply **concurrent thinking** to this problem, I decided to use the `threading` module, part of Python's standard library, to run each regex search in a separate thread:
+
+```python
+    def __init__(self, user: User):
+        self.page = requests.get(
+            endpoint, auth=(user.username, user.password)
+        ).content
+        self.user = user
+	# Set of threads used in the parser.
+	# I am using a set to ensure that threads are not duplicated.
+        self.threads: set = set()
+        self.student: Student = Student()
+        user_id = re.search(
+            br'UserId = "(\d+)"', self.page
+        )
+        if user_id is not None:
+            self.user_id: int = int(user_id.group(1))
+        patterns = {
+            'name': b'fullName: "([A-Za-z ]+)"',
+            'username': b'username: "([A-Za-z0-9]+)"',
+            'avatar': b'base64,(.*?)">',
+            'reference_number': br'Reference: </dt>\s+<dd>([A-Z0-9]+)',
+            'tutor': b'Tutor: </dt> <dd> (.*?) </dd>'
+        }
+	# Create a thread for getting the student's daily timetable, add it to threads
+        self.threads.add(Thread(target=self._get_short_timetable))
+	# Create a thread for getting the student's full timetable, add it to threads
+        self.threads.add(Thread(target=self._get_timetable))
+	# The threads created so far have not been started yet
+        for key, pattern in patterns.items():
+	    # For every regex pattern in the patterns I need to extract:
+            self.threads.add(
+	    	# Create a thread to extract that pattern and add it to threads
+                Thread(
+                    target=self._set_regex_group,
+                    args=(self.page, key, pattern)
+                )
+            )
+
+    def parse(self) -> Student:
+        """Parse the webpage content and return the resulting Student."""
+	# The __init__ method does not start the threads.
+	# Instead, this parse method will start each thread.
+        for thread in self.threads:
+	    # Start each thread concurrently
+            thread.start()
+        for thread in self.threads:
+	    # Close each thread once they have completed
+            thread.join()
+        self.student.email = '{0}@student.loreto.ac.uk'.format(
+            self.student.username
+        )
+        return self.student
+```
+
 # Bibliography
 
 ## Django Documentation: Database Fields
