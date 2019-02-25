@@ -869,6 +869,11 @@ However, I soon realised that each of these regular expression searches are bloc
         return self.student
 ```
 
+There are several reasons why using a threaded solution is an improvement:
+* Decreases the time needed for initialising the student object
+* Increases maximum code throughput, as multiple methods of my code will be running at one time
+* This solution therefore lends itself to **concurrent thinking** well
+
 # Bibliography
 
 ## Django Documentation: Database Fields
