@@ -614,7 +614,24 @@ In `dashboard/templates`, I have added `dashboard.html` and `sign-in.html`. `das
 ```
 This resulted in the following web page:
 
-![Boostrap example](https://github.com/AnonGuy/Structure/blob/master/docs/images/BootstrapExample.png)
+![Bootstrap example](https://github.com/AnonGuy/Structure/blob/master/docs/images/BootstrapExample.png)
+
+`sign-in.html` contains just a login form:
+
+```html
+<form action="", method="post", class="form-signin">
+  <h1 class="h3 mb-3 font-weight-normal">Sign in to Structure</h1>
+
+  <input class="form-control" id="inputUsername" name="username" placeholder="College username" required type="text" value="">
+  <input class="form-control" id="inputPassword" name="password" placeholder="College password" required type="password" value="">
+  <input class="btn btn-lg btn-primary btn-block" id="submit" name="submit" type="submit" value="Sign in">
+
+  <br/>
+</form>
+```
+This resulted in the following web page:
+
+![Signin example](https://github.com/AnonGuy/Structure/blob/master/docs/images/SigninProof.png)
 
 # Bibliography
 
