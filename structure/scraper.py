@@ -9,7 +9,7 @@ import requests
 
 from dashboard.models import Student, User
 
-endpoint = "https://my.loreto.ac.uk/"
+endpoint = 'https://my.loreto.ac.uk/'
 
 
 class LandingPageParser:
@@ -52,26 +52,32 @@ class LandingPageParser:
             'Thursday': [],
             'Friday': []
         }
-        day_meta = '<th>{0}(.*?)(<th>|</script>)'
+        day_meta = '<h3>{0}</h3>(.*?)</div>'
         lesson_meta = (
-            'Times">(?P<time>[0-9: -]*)'
-            '<.+?Code">(?P<subject>[A-Za-z() -]*)'
-            '<.+?Staff"> *?(?P<teacher>[A-Za-z ]*) *?'
-            '<.+?right">(?P<room>[A-Z0-9]*)'
+            '<strong>(?P<time>[0-9: -]*):</strong>'
+            ' (?P<subject>[A-Za-z ]*) in (?P<room>[A-Z0-9]*)'
+            ' with (?P<teacher>[A-Za-z ]*)'
         )
         now = datetime.now()
-        start = now - timedelta(days=now.weekday())
-        start = start.strftime('%Y-%m-%d')
-        response: bytes = requests.post(
-            f'{endpoint}attendance/timetable/studentWeek',
-            data={'week': start, 'student_user_id': self.user_id},
-            auth=(self.user.username, self.user.password),
-            headers={'X-Requested-With': 'XMLHttpRequest'}
-        ).content
+        start = now - timedelta(days=now.weekday() - 7)
+        match: Optional[re.Match] = None
+        while match is None:
+            start = start - timedelta(days=7)
+            beginning = start.strftime('%Y-%m-%d')
+            response: bytes = requests.post(
+                f'{endpoint}attendance/timetable/studentWeek',
+                data={'week': beginning, 'student_user_id': self.user_id},
+                auth=(self.user.username, self.user.password),
+                headers={'X-Requested-With': 'XMLHttpRequest'}
+            ).content
+            match = re.search(
+                day_meta.format('Monday').encode(), response, re.DOTALL
+            )
         for day, lesson in timetable.items():
-            content = re.search(
+            match = re.search(
                 day_meta.format(day).encode(), response, re.DOTALL
-            ).group(1).decode()
+            )
+            content = match.group(1).decode()
             for match in re.finditer(lesson_meta, content, re.DOTALL):
                 lesson.append(match.groupdict())
         self.student.timetable = timetable

@@ -60,7 +60,33 @@ There are several ways that computational methods can be applied to this project
 | Procedural | My application stack will be comprised of several Python modules, each separated into classes, methods and functions. I will be able to remove modules, test modules and edit modules in a way that does not affect any irrelevant components of the application. |
 | Concurrent | The web application must be able to handle multiple HTTP requests simultaneously. I will be applying concurrent thinking to plan and design the processing and response for each request. |
 
+
+
+### Conclusion
+
+The statements above have shown that my problem can be solved with a computational method. This makes it suited for a computer to solve with a program.
+
+If the problem is successfully solved, the stakeholders will be able to access a web dashboard where they will be able to **view their school timetable**,
+**add and remove events from this timetable**, and **view statistics of their study progress**.
+
 ### Research
+
+### Stakeholder Interview Questions
+
+* Have you ever used a homework management system before?
+* If so, what are your favourite features of this system?
+* Are there any features you want to see from a system like this?
+* Are there any features you want removed?
+
+### Interview results: Troy Sherlock
+#### Have you ever used a homework management system before?
+*Yes, I have used Show My Homework in high school to manage my timetabled lessons and homework.*
+#### If so, what are your favourite features of this system?
+*My favourite feature is the ability to colour-code homework slots depending on whether they are completed or not.*
+#### Are there any features you want to see from a system like this?
+*I would like to see a reminder system, such as push notifications for due homework.*
+#### Are there any features you want removed?
+*I do not like Show My Homework's "my calendar" system, and would like it to display more accurate time stamps.*
 
 I found a service that is a similar solution to my own, **showmyhomework.co.uk**, by Satchel:
 
@@ -74,25 +100,56 @@ homework tasks and revision session management.
 ![](https://satchel-sw-prod.imgix.net/images/products/timetables/timetables_@2x.png) | ![](https://satchel-sw-prod.imgix.net/images/products/timetables/mobile_timetables_@2x.png) |
 | Fully-featured management system | Minimal features, simple timetable with reminders  |
 
-### Stakeholder Interview Questions
+**Features worth including in my solution:**
+* **The simple, intuitive interface.**
+  This is because my users must be able to understand how the timetable is structured, and the best way to acheive this is to
+  use a format like the one that is used by ShowMyHomework, where the columns are for "time", and the rows for "day".
 
-* Have you ever used a homework management system before?
-* If so, what are your favourite features of this system?
-* Are there any features you want to see from a system like this?
-* Are there any features you want removed?
+**Possible limitations of the project:**
+* **The time limit.**
+  As I am given a relatively short time frame to complete a project of this scale, sacrifices must be made in order to complete the project
+  on time. These sacrifices may be manifested as libraries utilised when the standard library could be used, or features cut from the final
+  project due to high complexity.
+* **The cost.**
+  Part of this solution requires me to run the web application on server-level hardware. Although the ideal solution would be using a paid service,
+  I will be using a free service for this project. This may limit my solution efficiency.
 
+**Final requirements of the project:** <br>
+From the aforementioned statements, I have produced a detailed list of essential features of the solution:
 
-### Interview results: Troy Sherlock
-#### Have you ever used a homework management system before?
-*Yes, I have used Show My Homework in high school to manage my timetabled lessons and homework.*
-#### If so, what are your favourite features of this system?
-*My favourite feature is the ability to colour-code homework slots depending on whether they are completed or not.*
-#### Are there any features you want to see from a system like this?
-*I would like to see a reminder system, such as push notifications for due homework.*
-#### Are there any features you want removed?
-*I do not like Show My Homework's "my calendar" system, and would like it to display more accurate time stamps.*
+**Functionality** <br>
+The solution will be required to do the following:
+* **Display any Loreto student's timetable in an intuitive manner.**
+  This means that I will need to communicate with MyLoreto to retrieve this information, then parse it in such a way that my program will be able to
+  extract the necessary information from it, and finally render this information in a simple manner. As intuitiveness of the solution is subjective,
+  I will be using the opinion of my stakeholders to judge this.
 
-# Design
+* **Allow students to create their own custom entries in the timetable.**
+  This means that I will need to store the student's timetable in a persistent way, suggesting that I will need to use a database. This database will
+  store student timetables, as well as authentication for MyLoreto to verify the lessons. I will need to insert and remove data from the database upon
+  the user's request, so usage of SQL may be required.
+
+**Requirements:** <br>
+Due to the nature of my solution, there are two separate hardware requirements:
+
+* **Server Requirements:** The server-side application must be run on hardware that can maximise uptime, that is stay online for extended periods of time.
+This kind of hardware is provided by a number of services, however I will be using a [Heroku free tier](https://www.heroku.com) virtualised private server.
+I have mentioned above that running this application on a free service is not ideal, however Heroku provides build integration with GitHub, allowing me to
+manually check the uptime of my service. As for software requirements, the server will need to support the Python runtime. Heroku has this functionality
+builtin.
+
+* **Client Requirements:** As the bulk of my code will be executed server-side, the client only needs to be able to render HTML and execute JavaScript.
+This minor task can be done by most modern ARM/x86/x64 devices, such as mobile phones, laptops, raspberry pis or desktop PCs. I do not therefore have
+any particular hardware requirements. The only software that is required is a web browser.
+
+### Success Criteria
+There are some specific areas of my solution that will need to be checked to ensure that my project was a success. These areas are described below:
+* **User friendliness:** My stakeholders will need to check that the web interface of my project is sufficiently user friendly. To do this, they will score the
+user interface on a scale of 1 to 10.
+* **Robustness:** My stakeholders need to check that the system is robust, and so will be stress testing the system over the course of a week, with some provided
+test data. They will then rate the reliability of the service on a scale of 1 to 10.
+* **Scalability:** My stakeholders need to ensure that the system is scalable. To do this, I will ask multiple stakeholders to test the system at the same time,
+starting at a score of 10 and docking points for any issues or errors caused by this.
 
 ### Decomposing the Problem
 
@@ -103,24 +160,59 @@ Using procedural thinking, I have broken down my solution into six main problems
    authenticate a MyLoreto session, and scrape the relevant HTML elements such as timetabled lessons, markbook grades
    and attendance data, with the `re` library to match [HTML Regular Expressions](https://stackoverflow.com/a/1732454).
 * **Django Webserver**
-   * The Webserver will be the system that communicates with the customer. It will utilize the [Django](https://www.djangoproject.com/) backend web framework to handle HTTP requests from multiple users in parallel, and it will dynamically generate unique HTML files for each user, based on defined templates. This system will also render data such as timetabled lessons, in the form of styled HTML elements.
+   * The Webserver will be the system that communicates with the customer. It will utilize the [Django](https://www.djangoproject.com/)
+   backend web framework to handle HTTP requests from multiple users in parallel, and it will dynamically generate unique HTML files for
+   each user, based on defined templates. This system will also render data such as timetabled lessons, in the form of styled HTML elements.
 * **Object-Relational Mapper**
-   * An Object-Relational Mapper (ORM) is a library that utilises Object-Oriented Programming (OOP) to abstract complex SQL queries from the developer. For example, with a defined class `User`, `User(name="Jeremiah", age=18).save()` will execute the equivalent SQL statement, `INSERT INTO User (name, age) VALUES ("Jeremiah", 18)`. Although Django provides a builtin ORM for this purpose, I will be writing my own implementation from scratch.
+   * An Object-Relational Mapper (ORM) is a library that utilises Object-Oriented Programming (OOP) to abstract complex SQL queries from
+   the developer. For example, with a defined class `User`, `User(name="Jeremiah", age=18).save()` will execute the equivalent SQL statement,
+   `INSERT INTO User (name, age) VALUES ("Jeremiah", 18)`. Although Django provides a builtin ORM for this purpose, I will be writing my own
+   implementation from scratch.
 * **Web Application Programming Interface**
-   * The server-side API will be an interface providing raw data - for example, a POST request with authorization headers to `/api/student-data` might return JSON-formatted data about the student in question. This will be used for any further client applications, such as a mobile app or desktop feature.
+   * The server-side API will be an interface providing raw data - for example, a POST request with authorization headers to `/api/student-data`
+   might return JSON-formatted data about the student in question. This will be used for any further client applications, such as a mobile app
+   or desktop feature.
 * **Web Dashboard**
-   * The Web Dashboard will be the HTML frontend that will be displayed to the customers. The Django backend will generate this HTML from a defined template, and I will be using a popular frontend web framework, [Bootstrap](https://getbootstrap.com/), to create and style this template. 
+   * The Web Dashboard will be the HTML frontend that will be displayed to the customers. The Django backend will generate this HTML from a defined
+   template, and I will be using a popular frontend web framework, [Bootstrap](https://getbootstrap.com/), to create and style this template. 
 * **Mobile Application**
-   * The Mobile application will be a portable client for the Web API. It will be able to retrieve student timetables, add reminders for lessons, add custom timetable entries and add homework notes.
+   * The Mobile application will be a portable client for the Web API. It will be able to retrieve student timetables, add reminders for
+   lessons, add custom timetable entries and add homework notes.
 
 | Database Relationships | Data Flow Diagram |
 |:----------------------:|:-----------------:|
 |![](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureERD.png?raw=true)|![](https://github.com/AnonGuy/Structure/blob/master/docs/images/StructureDataFlow.png?raw=true) Users communicate with the system via the Mobile Client and online Dashboard.|
 
-### Key Variables
+# Development
 
+Before starting development, I have decided on the naming convention and code style I will use throughought the project. This will be based on [PEP8](https://www.python.org/dev/peps/pep-0008/),
+a document stating the standard conventions for Python style guide. <br>
 
-# Version 1
+In summary, I will be conforming to the following rules:
+
+**All functions and methods I define must contain a docstring explaining its use.**
+```python
+def add_two_numbers(a, b):
+    """Adds two numbers, a and b."""
+    return a + b
+```
+
+**All variables, methods and functions will use `snake_case`, rather than `mixedCase`.** <br>
+Any classes which I define will use `PascalCase`.
+```python
+some_variable = 'foo'
+
+class SomeClass:
+    def __init__(self):
+        self.bar = 'baz'
+
+    def what_is_bar(self):
+        """Returns the value of bar."""
+        return self.bar
+
+some_instance = SomeClass()
+```
+As is usual with any code (but particularly Python) I will be naming my variables and methods with thought, using names that enhance readability.
 
 I started by creating a simple script that will allow me to request and parse data from MyLoreto.
 I have decided to use the `requests` library to handle HTTP requests and responses, and the `re` builtin module to parse the content with regular expressions.
@@ -135,6 +227,7 @@ I will be using Regular Expression patterns to catch certain substrings of a HTT
 I am able to catch the Reference number with the following regex pattern: `Reference: </dt>\s+<dd>([A-Z0-9]+)`
 The `\s+` represents one or more whitespace characters, and the `[A-Z0-9]+` represents one or more capital alphanumeric characters.
 ```python
+>>> import re
 >>> html = """
 ... 	<dl class="dl-horizontal" style="font-size: 0.9em">
 ... 		<dt>Reference: </dt>
@@ -185,7 +278,8 @@ An example of this function is use can be seen below:
 ### Potential Improvement
 **I could improve this function's performance by utilising Python's builtin `threading` module, starting a new `Thread` for each regex search that I start. This means that each regex search will not block the execution of the next.**
 
-I also decided to create a method for use in validating MyLoreto credentials:
+I then decided to create a function for validating user credentials. I decided to create this function so that users are not presented with an error immediately after providing incorrect credentials. <br>
+In the case of incorrect credentials, this function will return `False`, and an alert will be provided to the user.
 ```python
 def valid_user(*credentials: str) -> bool:
     """Take a student's credentials and validate them."""
@@ -230,8 +324,11 @@ structure/
         models.py
         views.py
 ```
-In order to be able to modify and update my database, I did some research into [the Django documentation](https://github.com/AnonGuy/structure/blob/master/docs/README.md#django-documentation-database-fields) on it's builtin ORM.
-Though I will be implementing my own custom ORM for this project, I have decided to use the builtin ORM until the next iteration of development.
+In order to be able to modify and update my database, I did some research into [the Django documentation](https://github.com/AnonGuy/structure/blob/master/docs/README.md#django-documentation-database-fields) on its builtin ORM.
+Though I initially decided to create my own ORM for this project, I have made the decision to use Django's builtin ORM to save time on the project. <br>
+If I had more time to enhance this project, I would have written a custom ORM for this purpose.
+
+I described the following database models below:
 
 ```python
 """Define database models for use in the PostgreSQL server."""
@@ -254,6 +351,7 @@ class Student(models.Model):
     markbook = fields.JSONField()
 
     class Meta:
+        # Give the database table a specific name.
         db_table = "student"
 
 
@@ -265,9 +363,21 @@ class User(models.Model):
     password = models.CharField(max_length=20)
 
     class Meta:
+        # Give the database table a specific name.
         db_table = "user"
 ```
+As you can see, these models do not match the ones that I created during the Design phase. This is because I needed to create a simplified version of the product, so that I was able to test it as soon as possible.
 
 # Bibliography
+
 ## Django Documentation: Database Fields
 https://docs.djangoproject.com/en/2.1/topics/db/models/
+
+## Heroku Documentation: The Procfile
+https://devcenter.heroku.com/articles/procfile
+
+## Heroku Documentation: Monitoring and Metrics
+https://devcenter.heroku.com/categories/reference#monitoring-metrics
+
+## Timetables.js Documentation
+http://timetablejs.org
