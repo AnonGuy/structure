@@ -30,8 +30,11 @@ class StudentDataView(TemplateView):
             print(username, password)
             user = User(username=username, password=password)
             if valid_user(user):
+                print('User validated!')
                 parser = LandingPageParser(user)
+                print('Parsing student...')
                 student = parser.parse().__dict__
+                print('Finished parsing student!')
                 student.pop('_state')
                 return JsonResponse(student)
             else:

@@ -17,9 +17,6 @@ class Student(models.Model):
     attendance = fields.JSONField()
     markbook = fields.JSONField()
 
-    class Meta:
-        db_table = "student"
-
 
 class User(models.Model):
     """User model: contains information specific to user authorization."""
@@ -27,6 +24,3 @@ class User(models.Model):
     user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=8, unique=True)
     password = models.CharField(max_length=20)
-
-    class Meta:
-        db_table = "user"

@@ -1,5 +1,3 @@
-"""Define various webscraping methods."""
-
 import re
 from datetime import datetime, timedelta
 from threading import Thread
@@ -19,7 +17,7 @@ class LandingPageParser:
         """Set the Student data to the first group of the given match."""
         match = re.search(pattern, page)
         if match is not None:
-            self.student.__setattr__(name, match.group(1).decode())
+            setattr(self.student, name, match.group(1).decode())
 
     def _get_short_timetable(self):
         """Get the timetable for the current day."""
@@ -73,16 +71,21 @@ class LandingPageParser:
             match = re.search(
                 day_meta.format('Monday').encode(), response, re.DOTALL
             )
-        for day, lesson in timetable.items():
+        for day, lessons in timetable.items():
             match = re.search(
                 day_meta.format(day).encode(), response, re.DOTALL
             )
             content = match.group(1).decode()
             for match in re.finditer(lesson_meta, content, re.DOTALL):
-                lesson.append(match.groupdict())
+                lesson = match.groupdict()
+                start, _, end = lesson.pop('time').strip().partition(' - ')
+                lesson['start'] = start
+                lesson['end'] = end
+                lessons.append(lesson)
         self.student.timetable = timetable
 
     def __init__(self, user: User, path: Optional[str] = None):
+        """Add all thread objects without starting them."""
         if path is None:
             self.page = requests.get(
                 endpoint, auth=(user.username, user.password)
@@ -118,8 +121,10 @@ class LandingPageParser:
         """Parse the webpage content and return the resulting Student."""
         for thread in self.threads:
             thread.start()
+        print('Capture threads started...')
         for thread in self.threads:
             thread.join()
+        print('Capture threads complete!')
         self.student.email = '{0}@student.loreto.ac.uk'.format(
             self.student.username
         )
